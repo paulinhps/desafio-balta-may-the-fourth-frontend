@@ -1,0 +1,46 @@
+name: Build
+
+on:
+  pull_request:
+    branches: [ release ]
+    paths-ignore:
+      - '.scripts/**'
+      - .gitignore
+      - LICENSE
+      - README.md
+
+  workflow_call:
+    inputs:
+      build-artifacts:
+        type: boolean
+        required: true
+        default: false
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+      name: Checkout code
+
+    - name: Cache NuGet packages
+      uses: actions/cache@v3
+      with:
+        path: ~/.nuget/packages
+        key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-nuget-
+
+    - name: Install .NET
+      uses: actions/setup-dotnet@v4
+
+    - name: Restore solution
+      run: dotnet restore .\MyTheFourth\MyTheFourth.sln
+
+    - name: Build solution
+      run: dotnet build --no-restore --configuration Release IbgeBlazor.sln
+      
+    - name: Test solution
+      run: dotnet test --no-build --configuration Release --filter "FullyQualifiedName!~AcceptanceTests" .\MyTheFourth\MyTheFourth.sln
