@@ -37,10 +37,10 @@ jobs:
       uses: actions/setup-dotnet@v4
 
     - name: Restore solution
-      run: dotnet restore .\MyTheFourth\MyTheFourth.sln
+      run: dotnet restore  MyTheFourth/MyTheFourth.sln
 
     - name: Build solution
-      run: dotnet build --no-restore --configuration Release IbgeBlazor.sln
+      run: dotnet build --no-restore --configuration Release MyTheFourth/MyTheFourth.sln
       
     - name: Test solution
-      run: dotnet test --no-build --configuration Release --filter "FullyQualifiedName!~AcceptanceTests" .\MyTheFourth\MyTheFourth.sln
+      run: dotnet test --no-build --configuration Release --filter "FullyQualifiedName!~AcceptanceTests"  MyTheFourth/MyTheFourth.sln
