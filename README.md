@@ -9,14 +9,16 @@
 Desenvolvimento de um App Web completo, fornecendo recursos como criação, leitura, atualização e exclusão de dados referentes ao universo **Star Wars**.
 
 ## Participantes
+
 ### 🚀 Capitão
-[NOME e GITHUB]
+
+**Paulo Henrique Santana** [Github](https://github.com/paulinhps) | [Linkedin](https://www.linkedin.com/in/paulinhps).
 
 ### 💂‍♀️ Batalhão
-* [NOME e GITHUB]
-* [NOME e GITHUB]
-* [NOME e GITHUB]
-* [NOME e GITHUB]
+* **Alex Marafon** [Github](https://github.com/paulinhps) | [Linkedin](https://www.linkedin.com/in/alex-marafon-7a5552119).
+* **Allan Debastiani** [Github](https://github.com/Allandeba) | [Linkedin](https://www.linkedin.com/in/allan-debastiani).
+* **Thiago Cajaíba** [Github](https://github.com/thiagokj) | [Linkedin](https://www.linkedin.com/in/thiagocajaiba).
+* **Vitor Rennó** [Github](https://github.com/vitorrenno) | [Linkedin](https://www.linkedin.com/in/vitorrenno).
 
 ## ⚙️ Tecnologias
 * C# 12
