@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 
 namespace MyTheFourth.Frontend.Web.Models;
 
-public class StarshipResume
+public class StarshipResume : AbstractItemModel
 {
     [JsonPropertyName("id")]
     public int Id { get; set; }

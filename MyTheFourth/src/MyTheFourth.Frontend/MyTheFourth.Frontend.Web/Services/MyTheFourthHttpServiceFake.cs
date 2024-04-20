@@ -12,6 +12,7 @@ IStarshipsService
     private static Movie[] _movies = [
         new () {
             Id = 1,
+            Slug = "the-rise-of-the-jedi",
             Title =  "The Rise of the Jedi",
             Episode =  10,
             OpeningCrawl = @"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Temporibus, ab alias minima perspiciatis, totam impedit eveniet nulla voluptatibus ad tempora sunt, nisi amet dolorem voluptate. Quae maiores optio magnam beatae!
@@ -81,7 +82,6 @@ Maiores laborum dolores dolorem neque suscipit excepturi animi vitae porro nemo 
 
         }
     ];
-
     private static Character[] _characters = [
         new() {
             Id = 1,
@@ -181,11 +181,11 @@ Maiores laborum dolores dolorem neque suscipit excepturi animi vitae porro nemo 
             ]
         }
     ];
-
     private static Starship[] _starships = [
         new() {
             Id = 1,
             Name = "Galactic Explorer",
+            Slug = "galactic-explorer",
             Model = "GX-3",
             Manufacturer = "Interstellar Shipworks",
             CostInCredits = "800000",
@@ -210,7 +210,6 @@ Maiores laborum dolores dolorem neque suscipit excepturi animi vitae porro nemo 
             ]
         }
     ];
-
     public async Task<Movie?> GetMovieAsync(string movieId)
     {
         await Task.Delay(Random.Shared.Next(500, 5000));
@@ -271,7 +270,7 @@ Maiores laborum dolores dolorem neque suscipit excepturi animi vitae porro nemo 
     {
         await Task.Delay(Random.Shared.Next(500, 5000));
 
-        return _starships.FirstOrDefault(x => x.Id == int.Parse(starshipId));
+        return _starships.FirstOrDefault(x => x.Slug?.Equals(starshipId) is true || (int.TryParse(starshipId, out var id) && x.Id == id  ));
     }
 
     public async Task<IEnumerable<Starship>> ListStarshipsAsync(int? page = null, int? pageSize = null)

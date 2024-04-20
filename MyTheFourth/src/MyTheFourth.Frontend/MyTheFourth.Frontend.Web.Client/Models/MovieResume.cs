@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 
 namespace MyTheFourth.Frontend.Web.Models;
 
-public class MovieResume
+public class MovieResume : AbstractItemModel
 {
     [JsonPropertyName("id")]
     public int Id { get; set; }
