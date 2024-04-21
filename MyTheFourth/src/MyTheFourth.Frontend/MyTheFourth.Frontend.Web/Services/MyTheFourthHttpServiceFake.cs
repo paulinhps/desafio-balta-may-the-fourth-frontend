@@ -186,6 +186,7 @@ Maiores laborum dolores dolorem neque suscipit excepturi animi vitae porro nemo 
             Id = 1,
             Name = "Galactic Explorer",
             Slug = "galactic-explorer",
+            ImgUrl = "/images/sample/starship-galactic-explorer.jpg",
             Model = "GX-3",
             Manufacturer = "Interstellar Shipworks",
             CostInCredits = "800000",

@@ -1,0 +1,26 @@
+@font-face {
+    font-family: 'Poster Gothic Cond ATF';
+    src: url('PosterGothicCondATF-Medium.eot');
+    src: url('PosterGothicCondATF-Medium.eot?#iefix') format('embedded-opentype'),
+        url('PosterGothicCondATF-Medium.woff2') format('woff2'),
+        url('PosterGothicCondATF-Medium.woff') format('woff'),
+        url('PosterGothicCondATF-Medium.ttf') format('truetype'),
+        url('PosterGothicCondATF-Medium.svg#PosterGothicCondATF-Medium') format('svg');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Poster Gothic Cond ATF Bold';
+    src: url('PosterGothicCondATF-Bold.eot');
+    src: url('PosterGothicCondATF-Bold.eot?#iefix') format('embedded-opentype'),
+        url('PosterGothicCondATF-Bold.woff2') format('woff2'),
+        url('PosterGothicCondATF-Bold.woff') format('woff'),
+        url('PosterGothicCondATF-Bold.ttf') format('truetype'),
+        url('PosterGothicCondATF-Bold.svg#PosterGothicCondATF-Bold') format('svg');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
