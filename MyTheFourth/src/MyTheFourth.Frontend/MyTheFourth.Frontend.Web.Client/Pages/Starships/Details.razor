@@ -1,6 +1,5 @@
 @page "/starships/{starshipId}"
 
-
 @inject IStarshipsService StarShipsService
 @attribute [StreamRendering]
 
@@ -218,16 +217,12 @@ else {
 
                     <h5 class="font-size24 sm-font-size22 xs-font-size20 mb-2">Filmes que Participou</h5>
                     <div class="contact-info-section margin-40px-tb mt-4">
-                        <ul class="list-style9 no-margin">
-
-                            @foreach(MovieResume movie in @Starship.Movies) {
-                                <li>
-
-                                <a href="/movies/@movie.Id"><span>@movie.Title</span></a>
-
-                            </li>
+                        <Catalog>
+                            @foreach (MovieResume movie in @Starship.Movies) 
+                            {
+                                <CatalogDetail ImgUrl="@movie.ImgUrl" Name="@movie.Title" Link="@($"/movies/{movie.Slug ?? movie.Id.ToString()}")"/>
                             }
-                        </ul>
+                        </Catalog>
                     </div>
 
                 </div>
