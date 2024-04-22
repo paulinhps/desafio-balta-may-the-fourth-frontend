@@ -5,3 +5,12 @@
   background-color: white;
   opacity: 0.5;
 }
+
+.catalog-detail-container > a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.catalog-detail-container > a[href]:hover {
+  cursor: pointer;
+}
