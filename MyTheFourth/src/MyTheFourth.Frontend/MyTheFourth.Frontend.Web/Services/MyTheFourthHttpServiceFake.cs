@@ -159,6 +159,7 @@ Maiores laborum dolores dolorem neque suscipit excepturi animi vitae porro nemo 
         new() {
             Id = 1,
             Name =  "Star Voyager",
+            ImgUrl = "",
             Model =  "SV-2",
             Manufacturer =  "Galactic Starcraft",
             CostInCredits =  "500000",
