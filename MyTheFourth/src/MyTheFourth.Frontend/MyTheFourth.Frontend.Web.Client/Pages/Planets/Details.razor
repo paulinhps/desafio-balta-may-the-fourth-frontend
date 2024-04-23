@@ -1,4 +1,4 @@
-﻿@page "/planet/{planetId}"
+﻿@page "/planets/{planetId}"
 
 @inject IPlanetsService PlanetsService
 @attribute [StreamRendering]
@@ -12,7 +12,7 @@ else {
         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">🏚</a></li>
-                <li class="breadcrumb-item"><a href="/planet">Naves Espaciais</a></li>
+                <li class="breadcrumb-item"><a href="/planets">Planetas</a></li>
                 <li class="breadcrumb-item active" aria-current="page">@Planet.Name</li>
             </ol>
         </nav>
@@ -72,10 +72,10 @@ else {
                                 <div class="row">
                                     <div class="col-md-5 col-5">
                                         <i class="fas fa-map-marker-alt text-green"></i>
-                                        <strong class="margin-10px-left text-green">Comprimento:</strong>
+                                        <strong class="margin-10px-left text-green">Período Rotação:</strong>
                                     </div>
                                     <div class="col-md-7 col-7">
-                                        <p>@Starship.Length</p>
+                                        <p>@Planet.RotationPeriod</p>
                                     </div>
                                 </div>
 
@@ -85,10 +85,10 @@ else {
                                 <div class="row">
                                     <div class="col-md-5 col-5">
                                         <i class="fas fa-map-marker-alt text-green"></i>
-                                        <strong class="margin-10px-left text-green">Velocidade Máxima:</strong>
+                                        <strong class="margin-10px-left text-green">Período Orbital:</strong>
                                     </div>
                                     <div class="col-md-7 col-7">
-                                        <p>@Starship.MaxSpeed</p>
+                                        <p>@Planet.OrbitalPeriod</p>
                                     </div>
                                 </div>
 
@@ -98,10 +98,10 @@ else {
                                 <div class="row">
                                     <div class="col-md-5 col-5">
                                         <i class="fas fa-map-marker-alt text-green"></i>
-                                        <strong class="margin-10px-left text-green">Tripulação:</strong>
+                                        <strong class="margin-10px-left text-green">Gravidade:</strong>
                                     </div>
                                     <div class="col-md-7 col-7">
-                                        <p>@Starship.Crew</p>
+                                        <p>@Planet.Gravity</p>
                                     </div>
                                 </div>
 
@@ -111,10 +111,10 @@ else {
                                 <div class="row">
                                     <div class="col-md-5 col-5">
                                         <i class="fas fa-map-marker-alt text-green"></i>
-                                        <strong class="margin-10px-left text-green">Passageiros:</strong>
+                                        <strong class="margin-10px-left text-green">Terreno:</strong>
                                     </div>
                                     <div class="col-md-7 col-7">
-                                        <p>@Starship.Passengers</p>
+                                        <p>@Planet.Terrain</p>
                                     </div>
                                 </div>
 
@@ -124,10 +124,10 @@ else {
                                 <div class="row">
                                     <div class="col-md-5 col-5">
                                         <i class="fas fa-map-marker-alt text-green"></i>
-                                        <strong class="margin-10px-left text-green">Capacidade de Carga:</strong>
+                                        <strong class="margin-10px-left text-green">Superfície de água:</strong>
                                     </div>
                                     <div class="col-md-7 col-7">
-                                        <p>@Starship.CargoCapacity</p>
+                                        <p>@Planet.SurfaceWater</p>
                                     </div>
                                 </div>
 
@@ -137,10 +137,10 @@ else {
                                 <div class="row">
                                     <div class="col-md-5 col-5">
                                         <i class="fas fa-map-marker-alt text-green"></i>
-                                        <strong class="margin-10px-left text-green">Classificação do Hiperdrive:</strong>
+                                        <strong class="margin-10px-left text-green">População:</strong>
                                     </div>
                                     <div class="col-md-7 col-7">
-                                        <p>@Starship.HyperdriveRating</p>
+                                        <p>@Planet.Population</p>
                                     </div>
                                 </div>
 
@@ -150,10 +150,13 @@ else {
                                 <div class="row">
                                     <div class="col-md-5 col-5">
                                         <i class="fas fa-map-marker-alt text-green"></i>
-                                        <strong class="margin-10px-left text-green">MGLT:</strong>
+                                        <strong class="margin-10px-left text-green">Personagens:</strong>
                                     </div>
                                     <div class="col-md-7 col-7">
-                                        <p>@Starship.Mglt</p>
+                                        @foreach (var plan in @Planet.Characters)
+                                        {
+                                            <p> @plan.Name </p>
+                                        }
                                     </div>
                                 </div>
 
@@ -163,28 +166,18 @@ else {
                                 <div class="row">
                                     <div class="col-md-5 col-5">
                                         <i class="fas fa-map-marker-alt text-green"></i>
-                                        <strong class="margin-10px-left text-green">Consumíveis:</strong>
+                                        <strong class="margin-10px-left text-green">Filmes:</strong>
                                     </div>
                                     <div class="col-md-7 col-7">
-                                        <p>@Starship.Consumables</p>
+                                        @foreach (var movi in @Planet.Movies)
+                                        {
+                                            <p> @movi.Title </p>
+                                        }
                                     </div>
                                 </div>
 
                             </li>
-                            <li>
-
-                                <div class="row">
-                                    <div class="col-md-5 col-5">
-                                        <i class="fas fa-map-marker-alt text-green"></i>
-                                        <strong class="margin-10px-left text-green">Classe:</strong>
-                                    </div>
-                                    <div class="col-md-7 col-7">
-                                        <p>@Starship.Class</p>
-                                    </div>
-                                </div>
-
-                            </li>
-
+                          
                         </ul>
                     </div>
 
@@ -193,71 +186,12 @@ else {
 
             <div class="col-lg-4 col-md-5 xs-margin-30px-bottom">
                 <div class="team-single-img">
-                    <img style="max-width: 315px; width: 100%;" src="@Starship.ImgUrl" alt="@Starship.Name">
+                    <img style="max-width: 315px; width: 100%;" src="@Planet.ImgUrl" alt="@Planet.Name">
                 </div>
-                @* <div class="bg-light-gray padding-30px-all md-padding-25px-all sm-padding-20px-all text-center">
-            <h4 class="margin-10px-bottom font-size24 md-font-size22 sm-font-size20 font-weight-600">Class Teacher</h4>
-            <p class="sm-width-95 sm-margin-auto">We are proud of child student. We teaching great activities and best program for your kids.</p>
-            <div class="margin-20px-top team-single-icons">
-            <ul class="no-margin">
-            <li><a href="javascript:void(0)"><i class="fab fa-facebook-f"></i></a></li>
-            <li><a href="javascript:void(0)"><i class="fab fa-twitter"></i></a></li>
-            <li><a href="javascript:void(0)"><i class="fab fa-google-plus-g"></i></a></li>
-            <li><a href="javascript:void(0)"><i class="fab fa-instagram"></i></a></li>
-            </ul>
-            </div>
-            </div> *@
             </div>
 
         </div>
     </section>
-
-
-
-
-
-
-    <div>
-        <div>
-            <div>
-                <div>Clima:</div>
-                <div></div>
-                <hr/>
-                <div>Diâmetro:</div>
-                <div>@Planet.Diameter</div>
-                <hr/>
-                <div>Período Rotação:</div>
-                <div>@Planet.RotationPeriod</div>
-                <hr/>
-                <div>Período Orbital:</div>
-                <div>@Planet.OrbitalPeriod</div>
-                <hr/>
-                <div>Gravidade:</div>
-                <div>@Planet.Gravity</div>
-                <hr/>
-                <div>Terreno:</div>
-                <div>@Planet.Terrain</div>
-                <hr/>
-                <div>Superfície de água:</div>
-                <div>@Planet.SurfaceWater</div>
-                <hr/>
-                <div>População:</div>
-                <div>@Planet.Population</div>
-                <hr/>
-                <div>Personagens:</div>
-                @foreach (var plan in @Planet.Characters)
-                {
-                    <div> @plan.Name </div>
-                }
-                <hr>
-                <div>Filmes:</div>
-                @foreach (var movi in @Planet.Movies)
-                {
-                    <div> @movi.Title </div>
-                }
-            </div>
-        </div>
-    </div>
 }
 
 @code {
