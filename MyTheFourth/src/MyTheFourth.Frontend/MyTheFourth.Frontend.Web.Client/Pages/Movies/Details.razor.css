@@ -1,0 +1,21 @@
+﻿.movie-container {
+    background-color: red;
+    color: #fff;
+    font-family: 'Courier New', Courier, monospace;
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.movie-title {
+    font-size: 2.5em;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.movie-info {
+    font-size: 1.2em;
+    text-align: center;
+}

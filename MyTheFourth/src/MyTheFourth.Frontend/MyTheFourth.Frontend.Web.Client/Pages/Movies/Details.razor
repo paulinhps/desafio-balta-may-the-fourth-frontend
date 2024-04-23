@@ -1,0 +1,29 @@
+﻿@page "/movies/{movieId}"
+
+@inject IMoviesService MoviesService
+@attribute [StreamRendering]
+
+@if (_movie == null)
+{
+    <span>Loading...</span>
+}
+else
+{
+    <div class="movie-container">
+        <div class="movie-title">@_movie.Title</div>
+        <div class="movie-info">
+            <div>Episódio: @_movie.Episode</div>
+            <div>Diretor: @_movie.Director</div>
+            <div>Lançamento: @_movie.ReleaseDate.ToShortDateString()</div>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter] public string MovieId { get; set; } = null!;
+
+    private Movie? _movie;
+
+    protected override async Task OnInitializedAsync()
+        => _movie = await MoviesService.GetMovieAsync(MovieId);
+}
