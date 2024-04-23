@@ -32,19 +32,6 @@ else {
 
                                 <div class="row">
                                     <div class="col-md-5 col-5">
-                                        <i class="fas fa-graduation-cap text-orange"></i>
-                                        <strong class="margin-10px-left text-orange">Planeta:</strong>
-                                    </div>
-                                    <div class="col-md-7 col-7">
-                                        <p>@Planet.Name</p>
-                                    </div>
-                                </div>
-
-                            </li>
-                            <li>
-
-                                <div class="row">
-                                    <div class="col-md-5 col-5">
                                         <i class="far fa-gem text-yellow"></i>
                                         <strong class="margin-10px-left text-yellow">Clima:</strong>
                                     </div>
@@ -183,13 +170,26 @@ else {
 
                 </div>
             </div>
+            
+        </div>
+    </section>
+    <section id="movies">
+        <div class="row">
+            <div class="col-lg-8 col-md-7">
+                <div class="team-single-text padding-50px-left sm-no-padding-left">
 
-            <div class="col-lg-4 col-md-5 xs-margin-30px-bottom">
-                <div class="team-single-img">
-                    <img style="max-width: 315px; width: 100%;" src="@Planet.ImgUrl" alt="@Planet.Name">
+                    <h5 class="font-size24 sm-font-size22 xs-font-size20 mb-2">Filmes que Participou</h5>
+                    <div class="contact-info-section margin-40px-tb mt-4">
+                        <Catalog>
+                            @foreach (MovieResume movie in Planet.Movies) 
+                            {
+                                <CatalogDetail ImgUrl="@movie.ImgUrl" Name="@movie.Title" Link="@($"/movies/{movie.Slug ?? movie.Id.ToString()}")"/>
+                            }
+                        </Catalog>
+                    </div>
+
                 </div>
             </div>
-
         </div>
     </section>
 }
