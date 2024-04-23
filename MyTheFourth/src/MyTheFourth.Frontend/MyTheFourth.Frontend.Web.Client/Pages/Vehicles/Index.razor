@@ -13,15 +13,12 @@ else
     <Catalog>
         @foreach (var vehicle in Vehicles) 
         {
-            <CatalogDetail ImgUrl="@vehicle.ImgUrl" Name="@vehicle.Name"/>
+            <CatalogDetail ImgUrl="@vehicle.ImgUrl" Name="@vehicle.Name" Link="@($"vehicle/{vehicle.Slug ?? vehicle.Id.ToString()}")"/>
         }
     </Catalog>
 }
 
 @code {
-    [Parameter]
-    public string vehicleId { get; set; } = null!;
-
     private IEnumerable<Vehicle>? Vehicles = null;
 
     protected override async Task OnInitializedAsync() {
