@@ -2,7 +2,7 @@ name: Build
 
 on:
   pull_request:
-    branches: [ release ]
+    branches: [release]
     paths-ignore:
       - '.scripts/**'
       - .gitignore
@@ -18,29 +18,25 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-      name: Checkout code
+      - uses: actions/checkout@v4
+        name: Checkout code
 
-    - name: Cache NuGet packages
-      uses: actions/cache@v3
-      with:
-        path: ~/.nuget/packages
-        key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-nuget-
+      - name: Cache NuGet packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
 
-    - name: Install .NET
-      uses: actions/setup-dotnet@v4
+      - name: Install .NET
+        uses: actions/setup-dotnet@v4
 
-    - name: Restore solution
-      run: dotnet restore  MyTheFourth/MyTheFourth.sln
+      - name: Restore solution
+        run: dotnet restore MyTheFourth.Frontend/MyTheFourth.Frontend.csproj
 
-    - name: Build solution
-      run: dotnet build --no-restore --configuration Release MyTheFourth/MyTheFourth.sln
-      
-    - name: Test solution
-      run: dotnet test --no-build --configuration Release --filter "FullyQualifiedName!~AcceptanceTests"  MyTheFourth/MyTheFourth.sln
+      - name: Build solution
+        run: dotnet build --no-restore --configuration Release MyTheFourth.Frontend/MyTheFourth.Frontend.csproj

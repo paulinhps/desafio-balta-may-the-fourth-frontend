@@ -1,0 +1,27 @@
+@page "/vehicles"
+
+@inject IVehiclesService VehiclesService
+@attribute [StreamRendering]
+
+@if(Vehicles == null) 
+{
+    <StarWarsLoader Text="Carregando..." />
+}
+else 
+{
+    <Catalog>
+        @foreach (var vehicle in Vehicles) 
+        {
+            <CatalogDetail ImgUrl="@vehicle.ImgUrl" Name="@vehicle.Name" Link="@($"vehicles/{vehicle.Slug ?? vehicle.Id.ToString()}")"/>
+        }
+    </Catalog>
+}
+
+@code {
+    private IEnumerable<Vehicle>? Vehicles;
+
+    protected override async Task OnInitializedAsync() {
+
+       Vehicles = await VehiclesService.ListVehiclesAsync();
+    }
+}    

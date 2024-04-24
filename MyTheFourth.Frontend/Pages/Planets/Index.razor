@@ -1,0 +1,27 @@
+@page "/planets"
+
+@inject IPlanetsService planetService
+@attribute [StreamRendering]
+
+@if (Planets == null)
+{
+    <StarWarsLoader Text="Carregando..." />
+}
+else 
+{
+    <Catalog>
+        @foreach (var planets in Planets)
+        {
+            <CatalogDetail ImgUrl="@planets.ImgUrl" Name="@planets.Name" Link="@($"planets/{planets.Slug ?? planets.Id.ToString()}")" />
+        }
+    </Catalog>
+}
+
+@code {
+    private IEnumerable< PlanetResume>? Planets = null;
+
+    protected override async Task OnInitializedAsync() {
+
+        Planets = await planetService.ListPlanetsAsync();
+    }
+}    
