@@ -1,0 +1,43 @@
+@page "/configuration"
+@using MyTheFourth.Frontend.Constants
+
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+@inject NavigationManager navigationManager
+
+<h1>Painel de configuração</h1>
+
+<p>Aqui você pode escolher modificar qual a api de backend que fornecer os dados.</p>
+
+<EditForm Model="Model" OnValidSubmit="Submit" FormName="SelectionBackend">
+    <div>
+        <label>
+            Identifier:
+            <InputSelect @bind-Value="Model!.Id">
+                <option value="24d8f53d-6f7a-4aa6-a370-249156e024dc">Api Faker</option>
+                <option value="24d8f53d-6f7a-4aa6-a370-249156e024de">Api Faker II</option>
+            </InputSelect>
+        </label>
+    </div>
+    <div>
+        <button type="submit">Submit</button>
+    </div>
+</EditForm>
+
+@code {
+    [SupplyParameterFromForm]
+    public SelectionModel Model { get; set; } = new();
+
+    protected override void OnInitialized() => Model ??= new();
+
+    private async Task Submit()
+    {
+        await localStorage.SetItemAsync<string>(LocalStoragePropertyNaming.BackendServiceDataName, Model!.Id);
+
+            navigationManager.Refresh();
+    }
+
+    public class SelectionModel
+    {
+        public string? Id { get; set; }
+    }
+}

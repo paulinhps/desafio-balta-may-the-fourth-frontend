@@ -3,14 +3,26 @@ using MyTheFourth.Frontend.Services.Interfaces;
 
 namespace MyTheFourth.Frontend.Services;
 
-public class MyTheFourthHttpServiceFake :
-    IMoviesService,
-    ICharactersService,
-    IPlanetsService,
-    IVehiclesService,
-    IStarshipsService
-{
+public class MyTheFourthHttpServiceFake2 : MyTheFourthHttpServiceFake {
 
+    public override string ServiceId => "24d8f53d-6f7a-4aa6-a370-249156e024de";
+    public override async Task<Starship?> GetStarshipAsync(string starshipId)
+    {
+        var result = await base.GetStarshipAsync(starshipId);
+
+        if(result != null) {
+            result.Name = "Resultado do Fake2";
+        }
+
+        return result;
+    }
+}
+
+public class MyTheFourthHttpServiceFake :
+    IMyTheFourthService
+{
+    
+    public virtual string ServiceId => "24d8f53d-6f7a-4aa6-a370-249156e024dc";
     private static Movie[] _movies = [
         new () {
             Id = 1,
@@ -270,7 +282,7 @@ Maiores laborum dolores dolorem neque suscipit excepturi animi vitae porro nemo 
         return _vehicles;
     }
    
-    public async Task<Starship?> GetStarshipAsync(string starshipId)
+    public async virtual Task<Starship?> GetStarshipAsync(string starshipId)
     {
         await Task.Delay(Random.Shared.Next(500, 5000));
 
