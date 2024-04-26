@@ -8,8 +8,20 @@ using MyTheFourth.Frontend.DependencyInjections;
 using MyTheFourth.Frontend.Services;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
+
+
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
+
+
+var backendSection = builder.Configuration.GetSection("Backend").Get<IEnumerable<ApiConfiguration>>();
+
+if(backendSection is not null)
+foreach (var backend in backendSection) {
+    builder.Services.AddSingleton(backend);
+}
+
+builder.Services.AddSingleton<IApiConfigurationServiceCollection, ApiConfigurationServiceCollection>();
 
 builder.Services.AddTransient<MyTheFourthHttpServiceFake>();
 builder.Services.AddTransient<MyTheFourthHttpServiceFake2>();

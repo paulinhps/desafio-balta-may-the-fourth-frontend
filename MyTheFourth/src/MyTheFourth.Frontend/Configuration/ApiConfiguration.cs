@@ -1,15 +1,24 @@
 public class ApiConfiguration
 {
-    public string Name { get; set; } = "Nome do Batalhao";
-    public string  BaseAddress { get; set; } = "http://www.batalhao.com.br";
-    public PathConfiguration Path { get; set; }  = new();
+    public string ServiceId { get; set; } = null!;
+    public string Name { get; set; } = null!;
+    public string  BaseAddress { get; set; } = null!;
+    public bool AllowCrud { get; set; }
 }
 
-public class PathConfiguration
-{
-    public string Movies { get; set; } = "/api/movies";
-    public string Characters { get; set; } = "/api/characters";
-    public string Planets { get; set; } = "/api/planets";
-    public string Vericles { get; set; } = "/api/vericles";
-    public string Starships { get; set; } = "/api/starships";
+
+public interface IApiConfigurationServiceCollection {
+    IEnumerable<ApiConfiguration> ListAllowedBackends();
+}
+
+public class ApiConfigurationServiceCollection : IApiConfigurationServiceCollection {
+    private readonly IServiceProvider _serviceProvider;
+
+    public ApiConfigurationServiceCollection(IServiceProvider serviceProvider)
+    {
+        _serviceProvider = serviceProvider;
+    }
+
+    public IEnumerable<ApiConfiguration> ListAllowedBackends() 
+    => _serviceProvider.GetServices<ApiConfiguration>() ?? Array.Empty<ApiConfiguration>();
 }

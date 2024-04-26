@@ -6,10 +6,8 @@ namespace MyTheFourth.Frontend.DependencyInjections;
 
 public static class HttpClientDependencyInjectionExtensions
 {
-
     public static IServiceCollection AddBackendProviders(this IServiceCollection services)
     {
-
         // configura injeção do provider de serviço de api
         services.AddSingleton<IApiHttpServiceProvider, ApiHttpServiceProvider>();
 

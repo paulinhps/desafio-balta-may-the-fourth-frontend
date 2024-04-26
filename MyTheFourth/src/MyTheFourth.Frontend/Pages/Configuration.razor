@@ -1,8 +1,10 @@
 @page "/configuration"
+@using Microsoft.Extensions.Options
 @using MyTheFourth.Frontend.Constants
 
 @inject Blazored.LocalStorage.ILocalStorageService localStorage
 @inject NavigationManager navigationManager
+@inject IApiConfigurationServiceCollection apiConfigurationCollection
 
 <h1>Painel de configuração</h1>
 
@@ -13,8 +15,9 @@
         <label>
             Identifier:
             <InputSelect @bind-Value="Model!.Id">
-                <option value="24d8f53d-6f7a-4aa6-a370-249156e024dc">Api Faker</option>
-                <option value="24d8f53d-6f7a-4aa6-a370-249156e024de">Api Faker II</option>
+                @foreach(var backend in options) {
+                    <option value="@backend.ServiceId">@backend.Name</option>
+                }
             </InputSelect>
         </label>
     </div>
@@ -27,7 +30,14 @@
     [SupplyParameterFromForm]
     public SelectionModel Model { get; set; } = new();
 
-    protected override void OnInitialized() => Model ??= new();
+    private List<ApiConfiguration> options = new();
+
+    protected override async Task OnInitializedAsync() {
+
+        options = apiConfigurationCollection.ListAllowedBackends().ToList();
+
+      Model.Id = await  localStorage.GetItemAsync<string>(LocalStoragePropertyNaming.BackendServiceDataName);
+    }
 
     private async Task Submit()
     {
