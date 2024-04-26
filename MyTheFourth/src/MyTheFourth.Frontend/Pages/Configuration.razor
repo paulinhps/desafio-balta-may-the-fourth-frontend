@@ -1,6 +1,8 @@
 @page "/configuration"
 @using Microsoft.Extensions.Options
 @using MyTheFourth.Frontend.Constants
+@using MyTheFourth.Frontend.Configuration
+@using System.ComponentModel.DataAnnotations
 
 @inject Blazored.LocalStorage.ILocalStorageService localStorage
 @inject NavigationManager navigationManager
@@ -12,8 +14,10 @@
 
 <EditForm Model="Model" OnValidSubmit="Submit" FormName="SelectionBackend">
     <div>
+        <ValidationSummary />
+        <DataAnnotationsValidator />
         <label>
-            Identifier:
+            Backend Disponíveis:
             <InputSelect @bind-Value="Model!.Id">
                 @foreach(var backend in options) {
                     <option value="@backend.ServiceId">@backend.Name</option>
@@ -41,13 +45,15 @@
 
     private async Task Submit()
     {
-        await localStorage.SetItemAsync<string>(LocalStoragePropertyNaming.BackendServiceDataName, Model!.Id);
+        await localStorage.SetItemAsync<string>(LocalStoragePropertyNaming.BackendServiceDataName, Model.Id!);
 
             navigationManager.Refresh();
     }
 
     public class SelectionModel
     {
+
+        [Required]
         public string? Id { get; set; }
     }
 }

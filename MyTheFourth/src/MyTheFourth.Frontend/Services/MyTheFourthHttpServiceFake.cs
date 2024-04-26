@@ -1,94 +1,93 @@
+using MyTheFourth.Frontend.Constants;
 using MyTheFourth.Frontend.Models;
 using MyTheFourth.Frontend.Services.Interfaces;
 
 namespace MyTheFourth.Frontend.Services;
 
-public class MyTheFourthHttpServiceFake2 : MyTheFourthHttpServiceFake {
-
-    public override string ServiceId => "24d8f53d-6f7a-4aa6-a370-249156e024de";
-    public override async Task<Starship?> GetStarshipAsync(string starshipId)
-    {
-        var result = await base.GetStarshipAsync(starshipId);
-
-        if(result != null) {
-            result.Name = "Resultado do Fake2";
-        }
-
-        return result;
-    }
-}
-
 public class MyTheFourthHttpServiceFake :
     IMyTheFourthService
 {
-    
-    public virtual string ServiceId => "24d8f53d-6f7a-4aa6-a370-249156e024dc";
+
+    public virtual string ServiceId => BackendServicesIdentifiers.Faker;
     private static Movie[] _movies = [
-        new () {
+        new()
+        {
             Id = 1,
             Slug = "the-rise-of-the-jedi",
-            Title =  "The Rise of the Jedi",
-            Episode =  10,
+            Title = "The Rise of the Jedi",
+            Episode = 10,
             OpeningCrawl = @"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Temporibus, ab alias minima perspiciatis, totam impedit eveniet nulla voluptatibus ad tempora sunt, nisi amet dolorem voluptate. Quae maiores optio magnam beatae!
 Ducimus harum voluptatibus neque hic atque natus, aspernatur eaque non nam minus illum voluptate ipsam doloribus ipsum inventore commodi. Veritatis laudantium consequatur omnis iste optio autem facilis impedit similique? Consequuntur.
 Ipsam saepe non ratione, odio exercitationem sit, pariatur architecto nemo quae dolor et voluptatem dolorum, deserunt nam. Quaerat, molestias hic. Nostrum magnam, eum delectus quas ad possimus accusamus maxime iure!
 Obcaecati, fuga itaque quia reiciendis ab, inventore aliquam iste alias sit adipisci nulla officia illo animi at delectus est? Ea debitis nulla repudiandae ab magni laboriosam pariatur, doloremque porro explicabo.
 Maiores laborum dolores dolorem neque suscipit excepturi animi vitae porro nemo repudiandae a, eveniet minima, dignissimos totam eius repellendus. Accusantium minima voluptatibus quod fuga corporis laboriosam ullam ea at animi.",
-            Director =  "Jana Doe",
-            Producer =  "Leo Smith",
-            ReleaseDate =  Convert.ToDateTime("2028-12-15"),
+            Director = "Jana Doe",
+            Producer = "Leo Smith",
+            ReleaseDate = Convert.ToDateTime("2028-12-15"),
             Characters = [
-                new() {
+                new()
+                {
                     Id = 1,
                     Name = "Kara Zor-El",
                 },
-                new() {
+                new()
+                {
                     Id = 2,
                     Name = "Mara Jade",
                 },
-                new() {
+                new()
+                {
                     Id = 3,
                     Name = "Thrawn",
                 },
-                new() {
+                new()
+                {
                     Id = 4,
                     Name = "R2-D2",
                 }
             ],
             Planets = [
-                new () {
+                new()
+                {
                     Id = 1,
                     Name = "Coruscant"
                 },
-                new () {
+                new()
+                {
                     Id = 2,
                     Name = "Tatooine"
                 },
-                new () {
+                new()
+                {
                     Id = 3,
                     Name = "Dagobah"
                 }
             ],
             Vehicles = [
-                new () {
+                new()
+                {
                     Id = 1,
                     Name = "Speeder Bikes"
                 },
-                new () {
+                new()
+                {
                     Id = 2,
                     Name = "AT-AT Walkers"
                 }
             ],
             Starships = [
-                new () {
+                new()
+                {
                     Id = 1,
                     Name = "Millennium Falcon"
                 },
-                new () {
+                new()
+                {
                     Id = 2,
                     Name = "X-wing"
                 },
-                new () {
+                new()
+                {
                     Id = 3,
                     Name = "TIE Fighter"
                 }
@@ -97,7 +96,8 @@ Maiores laborum dolores dolorem neque suscipit excepturi animi vitae porro nemo 
         }
     ];
     private static Character[] _characters = [
-        new() {
+        new()
+        {
             Id = 1,
             Name = "Zara Kell",
             Height = "172 cm",
@@ -107,20 +107,24 @@ Maiores laborum dolores dolorem neque suscipit excepturi animi vitae porro nemo 
             EyeColor = "green",
             BirthYear = "242 ABY",
             Gender = "female",
-            Planet = new () {
+            Planet = new()
+            {
                 Id = 1,
                 Name = "Tatooine"
             },
             Movies = [
-                new() {
+                new()
+                {
                     Id = 1,
                     Title = "The Battle of the Stars"
                 },
-                new() {
+                new()
+                {
                     Id = 2,
                     Title = "Return of the Light"
                 },
-                new() {
+                new()
+                {
                     Id = 3,
                     Title = "Warriors of the Shadow Realm"
                 }
@@ -128,41 +132,48 @@ Maiores laborum dolores dolorem neque suscipit excepturi animi vitae porro nemo 
         }
     ];
     private static Planet[] _planets = [
-        new() {
+        new()
+        {
             Id = 1,
-            Name =  "Planetara",
-            RotationPeriod =  "24 hours",
-            OrbitalPeriod =  "365 days",
-            Diameter =  "12742 km",
-            Climate =  "temperate",
-            Gravity =  "1 standard",
-            Terrain =  "forests, mountains, rivers",
-            SurfaceWater =  "70%",
-            Population =  "2 billion",
+            Name = "Planetara",
+            RotationPeriod = "24 hours",
+            OrbitalPeriod = "365 days",
+            Diameter = "12742 km",
+            Climate = "temperate",
+            Gravity = "1 standard",
+            Terrain = "forests, mountains, rivers",
+            SurfaceWater = "70%",
+            Population = "2 billion",
             Characters = [
-                new() {
+                new()
+                {
                     Id = 1,
                     Name = "Zara Kell",
                 },
-                new() {
+                new()
+                {
                     Id = 2,
                     Name = "Tora Ziyal",
                 },
-                new() {
+                new()
+                {
                     Id = 3,
                     Name = "Finn Varra",
                 }
             ],
             Movies = [
-                new() {
+                new()
+                {
                     Id = 1,
                     Title = "The Galactic Quest"
                 },
-                new() {
+                new()
+                {
                     Id = 2,
                     Title = "Rise of the Planetara"
                 },
-                new() {
+                new()
+                {
                     Id = 3,
                     Title = "Echoes of the Stars"
                 }
@@ -170,26 +181,29 @@ Maiores laborum dolores dolorem neque suscipit excepturi animi vitae porro nemo 
         }
     ];
     private static Vehicle[] _vehicles = [
-        new() {
+        new()
+        {
             Id = 1,
-            Name =  "Star Voyager",
+            Name = "Star Voyager",
             ImgUrl = "",
-            Model =  "SV-2",
-            Manufacturer =  "Galactic Starcraft",
-            CostInCredits =  "500000",
-            Length =  "120 meters",
-            MaxSpeed =  "950 km/h",
-            Crew =  "5",
-            Passengers =  "30",
-            CargoCapacity =  "150000 kg",
-            Consumables =  "2 years",
-            Class =  "Cruiser",
+            Model = "SV-2",
+            Manufacturer = "Galactic Starcraft",
+            CostInCredits = "500000",
+            Length = "120 meters",
+            MaxSpeed = "950 km/h",
+            Crew = "5",
+            Passengers = "30",
+            CargoCapacity = "150000 kg",
+            Consumables = "2 years",
+            Class = "Cruiser",
             Movies = [
-                new() {
+                new()
+                {
                     Id = 1,
                     Title = "The Return of the Voyager",
                 },
-                new() {
+                new()
+                {
                     Id = 2,
                     Title = "Voyager's Endgame",
                 }
@@ -197,7 +211,8 @@ Maiores laborum dolores dolorem neque suscipit excepturi animi vitae porro nemo 
         }
     ];
     private static Starship[] _starships = [
-        new() {
+        new()
+        {
             Id = 1,
             Name = "Galactic Explorer",
             Slug = "galactic-explorer",
@@ -215,11 +230,13 @@ Maiores laborum dolores dolorem neque suscipit excepturi animi vitae porro nemo 
             Consumables = "6 months",
             Class = "Explorer",
             Movies = [
-                new() {
+                new()
+                {
                     Id = 1,
                     Title = "Galactic Odyssey"
                 },
-                new() {
+                new()
+                {
                     Id = 2,
                     Title = "The Edge of the Universe"
                 }
@@ -281,12 +298,12 @@ Maiores laborum dolores dolorem neque suscipit excepturi animi vitae porro nemo 
 
         return _vehicles;
     }
-   
+
     public async virtual Task<Starship?> GetStarshipAsync(string starshipId)
     {
         await Task.Delay(Random.Shared.Next(500, 5000));
 
-        return _starships.FirstOrDefault(x => x.Slug?.Equals(starshipId) is true || (int.TryParse(starshipId, out var id) && x.Id == id  ));
+        return _starships.FirstOrDefault(x => x.Slug?.Equals(starshipId) is true || (int.TryParse(starshipId, out var id) && x.Id == id));
     }
 
     public async Task<IEnumerable<Starship>> ListStarshipsAsync(int? page = null, int? pageSize = null)
@@ -296,5 +313,5 @@ Maiores laborum dolores dolorem neque suscipit excepturi animi vitae porro nemo 
         return _starships;
     }
 
-   
+
 }

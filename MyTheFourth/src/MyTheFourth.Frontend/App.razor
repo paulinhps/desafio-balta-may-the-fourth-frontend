@@ -1,7 +1,8 @@
-﻿@using MyTheFourth.Frontend.Constants
-@using MyTheFourth.Frontend.DependencyInjections
+﻿@using MyTheFourth.Frontend.Configuration
+@using MyTheFourth.Frontend.Constants
+
 @inject Blazored.LocalStorage.ILocalStorageService localStorage
-@inject IApiHttpServiceProvider backendProviderService
+@inject IBackendServiceProvider backendProviderService
 
 <Router AppAssembly="@typeof(App).Assembly">
     <Found Context="routeData">

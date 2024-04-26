@@ -7,21 +7,3 @@
 <h1>Hello, world!</h1>
 
 Welcome to your new app.
-
-<em>
-    <code>
-        @name
-    </code>
-</em>
-
-
-@code {
-
-    private string? name = string.Empty;
-    protected override async Task OnInitializedAsync()
-    {
-        ApiConfiguration apiConfiguration = new();
-        await localStorage.SetItemAsync<ApiConfiguration>("name", apiConfiguration);
-        name = await localStorage.GetItemAsync<string>("name");
-    }
-}
