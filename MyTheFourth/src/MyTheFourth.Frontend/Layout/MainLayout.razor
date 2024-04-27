@@ -1,24 +1,26 @@
 ﻿@inherits LayoutComponentBase
+
 <div class="wrapper">
     <div class="container-fluid">
-        <div class="row">
-            <Navbar/>
-            
-            <main class="col-sm p-3 py-5 min-vh-100">
-                <article class="container-fluid d-flex flex-column px-2 gap-2 pb-2">
-                    <nav class="breadcrumb breadcrumb d-none d-lg-flex m-0 p-2">
-                        <a class="breadcrumb-item" href="#">Main</a>
-                        <a class="breadcrumb-item" href="#">Sub</a>
-                        <span class="breadcrumb-item active" aria-current="page">Active</span>
-                    </nav>
+        <Navbar/>
+        
+        <main class="col-sm min-vh-100">
+            <article class="container-fluid d-flex flex-column px-2 gap-2 pb-2">
+                @* TODO: Fazer os breadcrumb de cada tela  *@
+                <nav class="breadcrumb breadcrumb d-none d-lg-flex m-0 p-2">
+                    <a class="breadcrumb-item" href="#">Main</a>
+                    <a class="breadcrumb-item" href="#">Sub</a>
+                    <span class="breadcrumb-item active" aria-current="page">Active</span>
+                </nav>
 
+                <div class="d-flex justify-content-center align-items-center">
                     @Body
+                </div>
 
-                </article>
-            </main>
+            </article>
+        </main>
 
-            <Footer/>            
-        </div>
+        <Footer/>            
     </div>
 </div>
 
