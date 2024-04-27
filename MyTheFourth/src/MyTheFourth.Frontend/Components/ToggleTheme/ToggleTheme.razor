@@ -1,0 +1,18 @@
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+@inject IJSRuntime Js
+
+<button type="button" class="btn btn-outline-primary mb-4" @onclick="ToggleThemeAsync">Trocar tema</button>
+
+@code {
+    private async Task ToggleThemeAsync() 
+    {
+        await Js.InvokeVoidAsync("toggleTheme");
+        await SaveThemeAsync();
+    }
+
+    private async Task SaveThemeAsync()
+    {
+        string theme = await Js.InvokeAsync<string>("getBsTheme");
+        await localStorage.SetItemAsStringAsync("theme", theme);
+    }
+}
