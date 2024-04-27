@@ -1,0 +1,203 @@
+﻿@inject IVehiclesService VehiclesService
+@attribute [StreamRendering]
+
+@if(Vehicle == null) {
+    <StarWarsLoader Text="Carregando..."/>
+}
+else
+{
+    <section>
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">🏚</a></li>
+                <li class="breadcrumb-item"><a href="/vehicles">Veículos</a></li>
+                <li class="breadcrumb-item active" aria-current="page">@Vehicle.Name</li>
+            </ol>
+        </nav>
+    </section>
+
+    <section class="team-single">
+        <div class="row">
+
+            <div class="col-lg-8 col-md-7">
+                <div class="team-single-text padding-50px-left sm-no-padding-left">
+                    <h1 class="font-size38 sm-font-size32 xs-font-size30">@Vehicle.Name</h1>
+                    <h5 class="font-size24 sm-font-size22 xs-font-size20 mb-2">Detalhes</h5>
+
+                    <div class="contact-info-section margin-40px-tb mt-4">
+                        <ul class="list-style9 no-margin">
+                            <li>
+
+                                <div class="row">
+                                    <div class="col-md-5 col-5">
+                                        <i class="fas fa-graduation-cap text-orange"></i>
+                                        <strong class="margin-10px-left text-orange">Modelo:</strong>
+                                    </div>
+                                    <div class="col-md-7 col-7">
+                                        <p>@Vehicle.Model</p>
+                                    </div>
+                                </div>
+
+                            </li>
+                            <li>
+
+                                <div class="row">
+                                    <div class="col-md-5 col-5">
+                                        <i class="far fa-gem text-yellow"></i>
+                                        <strong class="margin-10px-left text-yellow">Fabricante:</strong>
+                                    </div>
+                                    <div class="col-md-7 col-7">
+                                        <p>@Vehicle.Manufacturer</p>
+                                    </div>
+                                </div>
+
+                            </li>
+                            <li>
+
+                                <div class="row">
+                                    <div class="col-md-5 col-5">
+                                        <i class="far fa-file text-lightred"></i>
+                                        <strong class="margin-10px-left text-lightred">Custo (Em créditos):</strong>
+                                    </div>
+                                    <div class="col-md-7 col-7">
+                                        <p>@Vehicle.CostInCredits</p>
+                                    </div>
+                                </div>
+
+                            </li>
+                            <li>
+
+                                <div class="row">
+                                    <div class="col-md-5 col-5">
+                                        <i class="fas fa-map-marker-alt text-green"></i>
+                                        <strong class="margin-10px-left text-green">Comprimento:</strong>
+                                    </div>
+                                    <div class="col-md-7 col-7">
+                                        <p>@Vehicle.Length</p>
+                                    </div>
+                                </div>
+
+                            </li>
+                            <li>
+
+                                <div class="row">
+                                    <div class="col-md-5 col-5">
+                                        <i class="fas fa-map-marker-alt text-green"></i>
+                                        <strong class="margin-10px-left text-green">Velocidade Máxima:</strong>
+                                    </div>
+                                    <div class="col-md-7 col-7">
+                                        <p>@Vehicle.MaxSpeed</p>
+                                    </div>
+                                </div>
+
+                            </li>
+                            <li>
+
+                                <div class="row">
+                                    <div class="col-md-5 col-5">
+                                        <i class="fas fa-map-marker-alt text-green"></i>
+                                        <strong class="margin-10px-left text-green">Tripulação:</strong>
+                                    </div>
+                                    <div class="col-md-7 col-7">
+                                        <p>@Vehicle.Crew</p>
+                                    </div>
+                                </div>
+
+                            </li>
+                            <li>
+
+                                <div class="row">
+                                    <div class="col-md-5 col-5">
+                                        <i class="fas fa-map-marker-alt text-green"></i>
+                                        <strong class="margin-10px-left text-green">Passageiros:</strong>
+                                    </div>
+                                    <div class="col-md-7 col-7">
+                                        <p>@Vehicle.Passengers</p>
+                                    </div>
+                                </div>
+
+                            </li>
+                            <li>
+
+                                <div class="row">
+                                    <div class="col-md-5 col-5">
+                                        <i class="fas fa-map-marker-alt text-green"></i>
+                                        <strong class="margin-10px-left text-green">Capacidade de Carga:</strong>
+                                    </div>
+                                    <div class="col-md-7 col-7">
+                                        <p>@Vehicle.CargoCapacity</p>
+                                    </div>
+                                </div>
+
+                            </li>
+                            <li>
+
+                                <div class="row">
+                                    <div class="col-md-5 col-5">
+                                        <i class="fas fa-map-marker-alt text-green"></i>
+                                        <strong class="margin-10px-left text-green">Consumiveis:</strong>
+                                    </div>
+                                    <div class="col-md-7 col-7">
+                                        <p>@Vehicle.Consumables</p>
+                                    </div>
+                                </div>
+
+                            </li>
+                            <li>
+
+                                <div class="row">
+                                    <div class="col-md-5 col-5">
+                                        <i class="fas fa-map-marker-alt text-green"></i>
+                                        <strong class="margin-10px-left text-green">Classe:</strong>
+                                    </div>
+                                    <div class="col-md-7 col-7">
+                                        <p>@Vehicle.Class</p>
+                                    </div>
+                                </div>
+
+                            </li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-5 xs-margin-30px-bottom">
+                <div class="team-single-img">
+                    <img style="max-width: 315px; width: 100%;" src="@Vehicle.ImgUrl" alt="@Vehicle.Name">
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <section id="movies">
+        <div class="row">
+            <div class="col-lg-8 col-md-7">
+                <div class="team-single-text padding-50px-left sm-no-padding-left">
+
+                    <h5 class="font-size24 sm-font-size22 xs-font-size20 mb-2">Filmes que Participou</h5>
+                    <div class="contact-info-section margin-40px-tb mt-4">
+                        <Catalog>
+                            @foreach (MovieResume movie in @Vehicle.Movies)
+                            {
+                            <CatalogDetail ImgUrl="@movie.ImgUrl" Name="@movie.Title"
+                                           Link="@($"/movies/{movie.Slug ?? movie.Id.ToString()}")"/>
+                            }
+                        </Catalog>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+}
+
+@code {
+    [Parameter]
+    public string VehicleId { get; set; } = null!;
+
+    private Vehicle? Vehicle { get; set; }
+
+    protected override async Task OnInitializedAsync() => Vehicle = await VehiclesService.GetVehicleAsync(VehicleId);
+}    

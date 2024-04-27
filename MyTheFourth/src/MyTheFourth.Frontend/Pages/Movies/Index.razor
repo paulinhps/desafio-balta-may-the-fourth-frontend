@@ -12,7 +12,7 @@ else
     <Catalog>
         @foreach (var movie in Movies) 
         {
-            <CatalogDetail ImgUrl="@movie.ImgUrl" Name="@movie.Title" Link="@($"movies/{movie.Slug ?? movie.Id.ToString()}")"/>
+            <CatalogDetail ImgUrl="@movie.ImgUrl" Name="@movie.Title" Link="@($"movies/{movie.Id.ToString()}")"/>
         }
     </Catalog>
 }

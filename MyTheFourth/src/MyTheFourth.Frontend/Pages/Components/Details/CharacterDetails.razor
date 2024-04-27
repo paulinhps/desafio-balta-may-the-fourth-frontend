@@ -1,0 +1,160 @@
+﻿@inject ICharactersService CharactersService
+@attribute [StreamRendering]
+
+@if (Character == null)
+{
+    <StarWarsLoader Text="Carregando..." />
+}
+else
+{
+    <section>
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">🏚</a></li>
+                <li class="breadcrumb-item"><a href="/characters">Personagens</a></li>
+                <li class="breadcrumb-item active" aria-current="page">@Character.Id</li>
+            </ol>
+        </nav>
+    </section>
+
+    <section class="team-single">
+        <div class="row">
+
+            <div class="col-lg-8 col-md-7">
+                <div class="team-single-text padding-50px-left sm-no-padding-left">
+                    <h1 class="font-size38 sm-font-size32 xs-font-size30">@Character.Name</h1>
+
+                    <h5 class="font-size24 sm-font-size22 xs-font-size20 mb-2">Detalhes</h5>
+                    <div class="contact-info-section margin-40px-tb mt-4">
+                        <ul class="list-style9 no-margin">
+                            <li>
+
+                                <div class="row">
+                                    <div class="col-md-5 col-5">
+                                        <i class="fas fa-graduation-cap text-orange"></i>
+                                        <strong class="margin-10px-left text-orange">Data de Aniversário:</strong>
+                                    </div>
+                                    <div class="col-md-7 col-7">
+                                        <p>@Character.BirthYear</p>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-5 col-5">
+                                        <i class="fas fa-graduation-cap text-orange"></i>
+                                        <strong class="margin-10px-left text-orange">Planeta:</strong>
+                                    </div>
+                                    <div class="col-md-7 col-7">
+                                        <p>@Character.Planet.Name</p>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-5 col-5">
+                                        <i class="fas fa-graduation-cap text-orange"></i>
+                                        <strong class="margin-10px-left text-orange">Gênero:</strong>
+                                    </div>
+                                    <div class="col-md-7 col-7">
+                                        <p>@Character.Gender</p>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-5 col-5">
+                                        <i class="fas fa-graduation-cap text-orange"></i>
+                                        <strong class="margin-10px-left text-orange">Altura:</strong>
+                                    </div>
+                                    <div class="col-md-7 col-7">
+                                        <p>@Character.Height</p>
+                                    </div>
+                                </div>
+
+                            </li>
+                            <li>
+
+                                <div class="row">
+                                    <div class="col-md-5 col-5">
+                                        <i class="far fa-gem text-yellow"></i>
+                                        <strong class="margin-10px-left text-yellow">Largura:</strong>
+                                    </div>
+                                    <div class="col-md-7 col-7">
+                                        <p>@Character.Weight</p>
+                                    </div>
+                                </div>
+
+                            </li>
+                            <li>
+
+                                <div class="row">
+                                    <div class="col-md-5 col-5">
+                                        <i class="far fa-file text-lightred"></i>
+                                        <strong class="margin-10px-left text-lightred">Cor de Cabelo:</strong>
+                                    </div>
+                                    <div class="col-md-7 col-7">
+                                        <p>@Character.HairColor</p>
+                                    </div>
+                                </div>
+
+                            </li>
+                            <li>
+
+                                <div class="row">
+                                    <div class="col-md-5 col-5">
+                                        <i class="fas fa-map-marker-alt text-green"></i>
+                                        <strong class="margin-10px-left text-green">Cor de Pele:</strong>
+                                    </div>
+                                    <div class="col-md-7 col-7">
+                                        <p>@Character.SkinColor</p>
+                                    </div>
+                                </div>
+
+                            </li>
+                            <li>
+
+                                <div class="row">
+                                    <div class="col-md-5 col-5">
+                                        <i class="fas fa-map-marker-alt text-green"></i>
+                                        <strong class="margin-10px-left text-green">Cor de Olhos:</strong>
+                                    </div>
+                                    <div class="col-md-7 col-7">
+                                        <p>@Character.EyeColor</p>
+                                    </div>
+                                </div>
+
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="movies">
+        <div class="row">
+            <div class="col-lg-8 col-md-7">
+                <div class="team-single-text padding-50px-left sm-no-padding-left">
+
+                    <h5 class="font-size24 sm-font-size22 xs-font-size20 mb-2">Filmes que Participou</h5>
+                    <div class="contact-info-section margin-40px-tb mt-4">
+                        <Catalog>
+                            @foreach (MovieResume movie in Character.Movies)
+                            {
+                                <CatalogDetail ImgUrl="@movie.ImgUrl" Name="@movie.Title" Link="@($"/movies/{movie.Slug ?? movie.Id.ToString()}")" />
+                            }
+                        </Catalog>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+}
+
+@code {
+    [Parameter]
+    public string CharacterId { get; set; } = null!;
+
+    private Character? Character = null;
+
+    protected override async Task OnInitializedAsync() => Character = await CharactersService.GetCharacterAsync(CharacterId);
+}
