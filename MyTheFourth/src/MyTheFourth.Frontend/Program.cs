@@ -38,8 +38,6 @@ builder.Services.AddBackendProviders(
 }
 );
 
-builder.Services.AddBlazorBootstrap();
-
 builder.Services.AddBlazoredLocalStorage(config =>
 {
     config.JsonSerializerOptions.DictionaryKeyPolicy = JsonNamingPolicy.CamelCase;

@@ -1,6 +1,7 @@
 namespace MyTheFourth.Frontend.Services.Interfaces;
 
-public interface IMyTheFourthService : IMoviesService,
+public interface IMyTheFourthService : 
+    IMoviesService,
     ICharactersService,
     IPlanetsService,
     IVehiclesService,
