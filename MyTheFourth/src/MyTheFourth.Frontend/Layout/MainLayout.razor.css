@@ -1,7 +1,7 @@
 .stars {
+  background-repeat: repeat;
   position: absolute;
-  top: 100px;
-  left: -700px;
+  top: 0px;
   width: 1px;
   height: 1px;
   background: transparent;
