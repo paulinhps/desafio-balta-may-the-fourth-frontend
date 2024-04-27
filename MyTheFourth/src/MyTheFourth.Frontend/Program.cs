@@ -29,12 +29,14 @@ builder.Services.AddSingleton<IApiConfigurationServiceCollection, ApiConfigurati
 builder.Services.AddTransient<MyTheFourthHttpServiceFake>();
 builder.Services.AddTransient<MyTheFourthHttpServiceFake2>();
 
-builder.Services.AddBackendProviders(config =>
+builder.Services.AddBackendProviders(
+    config =>
 {
     config.RegistryService<MyTheFourthHttpServiceFake>();
     config.RegistryService<MyTheFourthHttpServiceFake2>();
     config.WithDefaultService(BackendServicesIdentifiers.Faker);
-});
+}
+);
 
 builder.Services.AddBlazorBootstrap();
 

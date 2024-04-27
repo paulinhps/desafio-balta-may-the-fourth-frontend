@@ -5,9 +5,12 @@ namespace MyTheFourth.Frontend.DependencyInjections;
 
 public static class BackendServiceExtensions
 {
-    public static IServiceCollection AddBackendProviders(this IServiceCollection services, Action<IBackendServiceConfigurationBuilder>? configAction = null)
+    public static IServiceCollection AddBackendProviders(this IServiceCollection services, Action<IBackendServiceConfigurationBuilder> configAction)
     {
         var configBuilder = BackendServiceConfigurationBuilder.Create(services);
+
+        configAction?.Invoke(configBuilder);
+
         configBuilder.Build();
 
         return services;

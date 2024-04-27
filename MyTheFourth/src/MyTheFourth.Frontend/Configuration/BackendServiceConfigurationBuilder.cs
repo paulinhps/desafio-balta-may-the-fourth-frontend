@@ -59,7 +59,6 @@ public class BackendServiceConfigurationBuilder : IBackendServiceConfigurationBu
         {
             _services.AddTransient(type, provider =>
             {
-
                 var service = provider.GetRequiredService<IBackendServiceProvider>().Current!;
                 return service;
             });
