@@ -20,6 +20,9 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\images\" />
+    <_ContentIncludedByDefault Remove="wwwroot\bootstrap\bootstrap.min.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\bootstrap\bootstrap.min.css.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\app.css" />
   </ItemGroup>
 
 </Project>
