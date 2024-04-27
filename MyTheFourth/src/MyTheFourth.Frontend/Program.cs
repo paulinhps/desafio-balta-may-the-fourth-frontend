@@ -48,7 +48,6 @@ builder.Services.AddBlazoredLocalStorage(config =>
     config.JsonSerializerOptions.ReadCommentHandling = JsonCommentHandling.Skip;
     config.JsonSerializerOptions.WriteIndented = false;
 });
-builder.Services.AddApiHttpServiceFake();
 builder.Services.AddBlazoredLocalStorage();
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
