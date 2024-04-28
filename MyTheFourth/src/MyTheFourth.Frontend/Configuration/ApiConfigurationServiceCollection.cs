@@ -9,6 +9,9 @@ public class ApiConfigurationServiceCollection : IApiConfigurationServiceCollect
         _serviceProvider = serviceProvider;
     }
 
+    public ApiConfiguration GetConfiguration(string serviceId)
+    => ListAllowedBackends().First(backend => backend.ServiceId.Equals(serviceId));
+
     public IEnumerable<ApiConfiguration> ListAllowedBackends()
     => _serviceProvider.GetServices<ApiConfiguration>() ?? Array.Empty<ApiConfiguration>();
 }
