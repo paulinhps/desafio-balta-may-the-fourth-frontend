@@ -25,12 +25,5 @@
         if(!string.IsNullOrEmpty(backendId)) {
             backendProviderService.SetServiceId(backendId);
         }
-
-        await SetThemeAsync();
-    }
-
-    private async Task SetThemeAsync() {
-        var theme = await localStorage.GetItemAsStringAsync("theme");
-        await Js.InvokeVoidAsync("setTheme", args: theme);
     }
 }
