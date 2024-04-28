@@ -1,7 +1,26 @@
 ﻿@page "/"
 
 @inject Blazored.LocalStorage.ILocalStorageService localStorage
+@inject IJSRuntime JSRuntime
+@attribute [StreamRendering]
 
 <PageTitle>Home</PageTitle>
 
 <h1>Welcome my friend</h1>
+
+@code {
+    [Inject] protected ToastService ToastService { get; set; } = default!;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            bool isStandalone = await JSRuntime.InvokeAsync<bool>("isStandalone");
+
+            if (!isStandalone)
+            {
+                ToastService.Notify(new ToastMessage(ToastType.Primary, "O Star quack pode ser instalado localmente!"));
+            }
+        }
+    }
+}
