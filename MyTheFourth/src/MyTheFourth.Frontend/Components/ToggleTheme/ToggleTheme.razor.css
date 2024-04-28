@@ -145,12 +145,11 @@
 }
 
 .theme__toggle:checked ~ .theme__icon .theme__icon-part:nth-child(1) {
-  box-shadow: 0.2em -0.2em 0 0.2em hsl(0, 0%, 100%) inset;
-  transform: scale(1);
-  top: calc(50% - 0.5em);
+  box-shadow: 0.2em -0.2em 0 0.2em hsl(198, 90%, 15%) inset;
+  top: calc(50% - 0.3em);
   left: calc(50% - 0.5em);
   transition: box-shadow var(--transDur) ease-in-out, opacity var(--transDur) ease-in-out, transform var(--transDur) ease-in-out;
-  transform: scale(0.5);
+  transform: scale(3.25);
 }
 
 .theme__toggle:checked ~ .theme__icon .theme__icon-part ~ .theme__icon-part {
