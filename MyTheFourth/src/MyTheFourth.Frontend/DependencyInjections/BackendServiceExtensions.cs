@@ -19,18 +19,17 @@ public static class BackendServiceExtensions
         return configBuilder;
     }
 
-    public static IBackendServiceConfigurationBuilder AddBackendProviders(this WebAssemblyHostBuilder builder, string backEndSectionName = "Backend", params Assembly[] assemblies)
-    {
+    public static IBackendServiceConfigurationBuilder AddBackendProviders(this WebAssemblyHostBuilder builder, string backEndSectionName = "Backend", params Assembly[] assemblies) {
 
-        if (assemblies == null) throw new ApiConfigurationException("This feature request one o more assemblies");
+        if(assemblies == null) throw new ApiConfigurationException("This feature request one o more assemblies");
 
         var backendSection = builder.Configuration.GetSection(backEndSectionName).Get<IEnumerable<ApiConfiguration>>();
 
-        if (backendSection is not null)
-            foreach (var backend in backendSection)
-            {
-                builder.Services.AddSingleton(backend);
-            }
+         if (backendSection is not null)
+        foreach (var backend in backendSection)
+        {
+            builder.Services.AddSingleton(backend);
+        }
 
 
         var serviceType = typeof(IMyTheFourthService);
@@ -38,10 +37,9 @@ public static class BackendServiceExtensions
         .Where(serviceType.IsAssignableFrom)
         .ToArray();
 
-        return builder.Services.AddBackendProviders(config =>
-        {
-            config.RegistryServices(servicesImplementationList);
-        });
-    }
+         return builder.Services.AddBackendProviders(config => {
+                config.RegistryServices(servicesImplementationList);
+            });
+    } 
 
 }
