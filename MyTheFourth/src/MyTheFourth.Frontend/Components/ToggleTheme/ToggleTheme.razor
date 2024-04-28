@@ -1,7 +1,7 @@
 @inject Blazored.LocalStorage.ILocalStorageService localStorage
 @inject IJSRuntime Js
 
-<button type="button" class="btn btn-outline-primary mb-4" @onclick="ToggleThemeAsync">Trocar tema</button>
+<button type="button" class="btn btn-outline-primary mb-4 py-3 px-4" @onclick="ToggleThemeAsync">Trocar tema</button>
 
 @code {
     private async Task ToggleThemeAsync() 
