@@ -1,6 +1,7 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Blazored.LocalStorage;
+using System.Reflection;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MyTheFourth.Frontend;
@@ -8,35 +9,20 @@ using MyTheFourth.Frontend.Configuration;
 using MyTheFourth.Frontend.Constants;
 using MyTheFourth.Frontend.DependencyInjections;
 using MyTheFourth.Frontend.Services;
+using DevResistence = MyTheFourth.Frontend.Integrations.DevsResistence;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
-
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
-
-
-var backendSection = builder.Configuration.GetSection("Backend").Get<IEnumerable<ApiConfiguration>>();
-
-if (backendSection is not null)
-    foreach (var backend in backendSection)
-    {
-        builder.Services.AddSingleton(backend);
-    }
 
 builder.Services.AddSingleton<IApiConfigurationServiceCollection, ApiConfigurationServiceCollection>();
 
 builder.Services.AddTransient<MyTheFourthHttpServiceFake>();
 builder.Services.AddTransient<MyTheFourthHttpServiceFake2>();
 
-builder.Services.AddBackendProviders(
-    config =>
-{
-    config.RegistryService<MyTheFourthHttpServiceFake>();
-    config.RegistryService<MyTheFourthHttpServiceFake2>();
-    config.WithDefaultService(BackendServicesIdentifiers.Faker);
-}
-);
+builder.AddBackendProviders(assemblies: Assembly.GetExecutingAssembly())
+       .AddApi<DevResistence.MyTheFourthHttpService>(BackendServicesIdentifiers.DevResistence);
 
 builder.Services.AddBlazoredLocalStorage(config =>
 {
@@ -52,6 +38,36 @@ builder.Services.AddBlazoredLocalStorage();
 
 builder.Services.AddBlazorBootstrap();
 
+
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
 await builder.Build().RunAsync();
+
+
+public static class BackendApiServiceExtensions {
+
+    public static IBackendServiceConfigurationBuilder AddApi<TService>(this IBackendServiceConfigurationBuilder backendBuilder, string apiServiceId) where TService : class{
+
+    return backendBuilder.AddHttpClient<TService>(apiServiceId);
+
+    }
+}
+
+[Serializable]
+internal class ApiConfigurationException : Exception
+{
+    public ApiConfigurationException()
+    {
+    }
+
+    public ApiConfigurationException(string? message) : base(message)
+    {
+    }
+
+    public ApiConfigurationException(string? message, Exception? innerException) : base(message, innerException)
+    {
+    }
+    
+}

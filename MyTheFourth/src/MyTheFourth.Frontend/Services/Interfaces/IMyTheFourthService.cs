@@ -7,5 +7,6 @@ public interface IMyTheFourthService :
     IVehiclesService,
     IStarshipsService
 {
+    
     string ServiceId { get; }
 }
