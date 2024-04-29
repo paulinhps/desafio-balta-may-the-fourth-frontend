@@ -71,5 +71,4 @@ internal class ApiConfigurationException : Exception
     public ApiConfigurationException(string? message, Exception? innerException) : base(message, innerException)
     {
     }
-
 }
