@@ -247,7 +247,7 @@ Maiores laborum dolores dolorem neque suscipit excepturi animi vitae porro nemo 
     {
         await Task.Delay(Random.Shared.Next(500, 5000));
 
-        return _movies.FirstOrDefault(x => x.Slug?.Equals(movieId) is true || (int.TryParse(movieId, out var id) && x.Id == id));
+        return _movies.FirstOrDefault(x => x.Slug?.Equals(movieId) is true || x.Id.Equals(movieId));
     }
 
     public async Task<IEnumerable<Movie>> ListMoviesAsync(int? page = null, int? pageSize = null)

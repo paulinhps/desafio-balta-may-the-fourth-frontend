@@ -64,5 +64,4 @@ public enum EPagesNavigationsKey
     Planets,
     Vehicles,
     Starships,
-
 }
