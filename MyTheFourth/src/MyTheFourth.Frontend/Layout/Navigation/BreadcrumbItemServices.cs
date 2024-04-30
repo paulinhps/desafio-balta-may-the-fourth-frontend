@@ -13,14 +13,16 @@ public class BreadcrumbItemService : IBreadcrumbItemService
     => UpdateBreadcrumbs([]);
 }
 
-public interface IBreadcrumbItemService : IBreadcrumbItemServiceEvents {
+public interface IBreadcrumbItemService : IBreadcrumbItemServiceEvents
+{
     void UpdateBreadcrumbs(params BreadcrumbItem[] breadcrumbItems);
     void UpdateHasEmpty();
 }
 
-public interface IBreadcrumbItemServiceEvents {
+public interface IBreadcrumbItemServiceEvents
+{
     event EventHandler<BreadcrumbItemsEventArgs> OnItemsChanged;
-    
+
 }
 
 public class BreadcrumbItemsEventArgs : EventArgs

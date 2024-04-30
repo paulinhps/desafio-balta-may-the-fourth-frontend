@@ -2,48 +2,49 @@ using BlazorBootstrap;
 
 public struct PagesNavigationModule(EPagesNavigationsKey moduleKey, string Name, IEnumerable<BreadcrumbItem> navigationItems)
 {
-    
-    
+
+
     public EPagesNavigationsKey ModuleKey { get; } = moduleKey;
     public string Name { get; } = Name;
     public IEnumerable<BreadcrumbItem> NavigationItems { get; } = navigationItems;
 
-    public static implicit operator PagesNavigationModule(EPagesNavigationsKey moduleKey) 
+    public static implicit operator PagesNavigationModule(EPagesNavigationsKey moduleKey)
         => GetAvaliablesModules().First(i => i.ModuleKey == moduleKey);
 
     private static PagesNavigationModule None = new(EPagesNavigationsKey.None, string.Empty, []);
     private static PagesNavigationModule Home = new(
-            EPagesNavigationsKey.Home, 
+            EPagesNavigationsKey.Home,
             "Início",
-            [new BreadcrumbItem{ Text = "Início", Href ="/" }]); 
+            [new BreadcrumbItem { Text = "Início", Href = "/" }]);
 
     private static PagesNavigationModule Movies = new(
-        EPagesNavigationsKey.Movies, 
+        EPagesNavigationsKey.Movies,
         "Filmes",
-        [..Home.NavigationItems, new BreadcrumbItem{ Text = "Filmes", Href ="/movies" }]); 
+        [.. Home.NavigationItems, new BreadcrumbItem { Text = "Filmes", Href = "/movies" }]);
 
     private static PagesNavigationModule Characters = new(
         EPagesNavigationsKey.Characters,
-        "Personagens", 
-        [..Home.NavigationItems, new BreadcrumbItem{ Text = "Personagens", Href ="/characters" }]); 
+        "Personagens",
+        [.. Home.NavigationItems, new BreadcrumbItem { Text = "Personagens", Href = "/characters" }]);
 
     private static PagesNavigationModule Planets = new(
-        EPagesNavigationsKey.Planets, 
+        EPagesNavigationsKey.Planets,
         "Planetas",
-        [..Home.NavigationItems, new BreadcrumbItem{ Text = "Planetas", Href ="/planets" }]); 
+        [.. Home.NavigationItems, new BreadcrumbItem { Text = "Planetas", Href = "/planets" }]);
 
     private static PagesNavigationModule Vericles = new(
-        EPagesNavigationsKey.Vehicles, 
+        EPagesNavigationsKey.Vehicles,
         "Veículos",
-        [..Home.NavigationItems, new BreadcrumbItem{ Text = "Veiculos", Href ="/vericles" }]); 
+        [.. Home.NavigationItems, new BreadcrumbItem { Text = "Veiculos", Href = "/vericles" }]);
 
     private static PagesNavigationModule Starships = new(
-        EPagesNavigationsKey.Starships, 
+        EPagesNavigationsKey.Starships,
         "Naves Espaciais",
-        [..Home.NavigationItems, new BreadcrumbItem{ Text = "Naves Espaciais", Href ="/starships" }]); 
-    
+        [.. Home.NavigationItems, new BreadcrumbItem { Text = "Naves Espaciais", Href = "/starships" }]);
 
-    private static IEnumerable<PagesNavigationModule> GetAvaliablesModules() {
+
+    private static IEnumerable<PagesNavigationModule> GetAvaliablesModules()
+    {
         yield return None;
         yield return Home;
         yield return Movies;
@@ -54,7 +55,8 @@ public struct PagesNavigationModule(EPagesNavigationsKey moduleKey, string Name,
     }
 }
 
-public enum EPagesNavigationsKey {
+public enum EPagesNavigationsKey
+{
     None,
     Home,
     Movies,
@@ -62,5 +64,5 @@ public enum EPagesNavigationsKey {
     Planets,
     Vehicles,
     Starships,
-    
+
 }
