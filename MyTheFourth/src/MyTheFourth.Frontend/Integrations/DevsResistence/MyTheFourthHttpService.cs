@@ -11,7 +11,8 @@ public static class MyTheFourthHttpServiceEndpoints {
     public const string MoviesEndpoint = "/movies";
     public const string CharacterEndpoint = "/characters";
     public const string PlanetsEndpoint = "/planets";
-    public const string StarShipsEndpoint = "/starships";
+    public const string StarshipsEndpoint = "/starships";
+    public const string VehiclesEndpoint = "/starships";
 }
 
 
@@ -59,16 +60,21 @@ IMyTheFourthService
 
     public async Task<Starship?> GetStarshipAsync(string starshipId)
     {
-        var response = await _client.GetAsync($"{MyTheFourthHttpServiceEndpoints.StarShipsEndpoint}/{starshipId}");
+        var response = await _client.GetAsync($"{MyTheFourthHttpServiceEndpoints.StarshipsEndpoint}/{starshipId}");
 
         var result = await response.GetContentData<StarshipDataModel>();
 
         return  result is not null ? _mapper.Map<Starship>(result) : default!;
     }
 
-    public Task<Vehicle?> GetVehicleAsync(string vehicleId)
+    public async Task<Vehicle?> GetVehicleAsync(string vehicleId)
     {
-        throw new NotImplementedException();
+        
+        var response = await _client.GetAsync($"{MyTheFourthHttpServiceEndpoints.VehiclesEndpoint}/{vehicleId}");
+
+        var result = await response.GetContentData<VehicleDataModel>();
+
+        return  result is not null ? _mapper.Map<Vehicle>(result) : default!;
     }
 
     public async Task<IEnumerable<Character>> ListCharactersAsync(int? page = null, int? pageSize = null)
@@ -132,7 +138,7 @@ IMyTheFourthService
     {
          try
         {
-            var response = await _client.GetAsync($"{MyTheFourthHttpServiceEndpoints.StarShipsEndpoint}?pageNumber={page ?? 1}&pageSize={pageSize ?? 10}");
+            var response = await _client.GetAsync($"{MyTheFourthHttpServiceEndpoints.StarshipsEndpoint}?pageNumber={page ?? 1}&pageSize={pageSize ?? 10}");
 
             var result = await response.GetContentData<StarshipListResponse>();
 
@@ -147,9 +153,23 @@ IMyTheFourthService
             return Enumerable.Empty<Starship>();
     }
 
-    public Task<IEnumerable<Vehicle>> ListVehiclesAsync(int? page = null, int? pageSize = null)
+    public async Task<IEnumerable<Vehicle>> ListVehiclesAsync(int? page = null, int? pageSize = null)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var response = await _client.GetAsync($"{MyTheFourthHttpServiceEndpoints.VehiclesEndpoint}?pageNumber={page ?? 1}&pageSize={pageSize ?? 10}");
+
+            var result = await response.GetContentData<VehicleListResponse>();
+
+            return  result?.Results?.Any() is true ? _mapper.Map<IEnumerable<Vehicle>>(result.Results) : Enumerable.Empty<Vehicle>();
+            
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+
+        }
+            return Enumerable.Empty<Vehicle>();
     }
 }
 
@@ -168,7 +188,11 @@ public class DevResistenceMapper : Profile {
         CreateMap<StarshipDataModel, Starship>()
         .IncludeBase<StarshipDataModel, StarshipResume>();
 
-        CreateMap<VehicleDataModel, VehicleResume>();
+        CreateMap<VehicleDataModel, VehicleResume>()
+        .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Title));
+
+        CreateMap<VehicleDataModel, Vehicle>()
+        .IncludeBase<VehicleDataModel, VehicleResume>();
 
         CreateMap<PlanetDataModel, PlanetResume>();
 
@@ -180,7 +204,6 @@ public class DevResistenceMapper : Profile {
         CreateMap<CharacterDataModel, Character>()
         .IncludeBase<CharacterDataModel, CharacterResume>();
 
-        
 
 
 

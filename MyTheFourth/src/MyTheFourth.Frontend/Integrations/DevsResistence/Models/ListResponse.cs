@@ -32,3 +32,7 @@ public class PlanetListResponse : ListResponse<PlanetDataModel> {
 public class StarshipListResponse : ListResponse<StarshipDataModel> {
     
 }
+
+public class VehicleListResponse : ListResponse<VehicleDataModel> {
+    
+}
