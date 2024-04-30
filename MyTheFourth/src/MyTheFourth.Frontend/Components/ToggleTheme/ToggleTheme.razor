@@ -27,7 +27,10 @@
     {
         var theme = await localStorage.GetItemAsync<string>("theme") as String;
         if (string.IsNullOrEmpty(theme))
+        {
+            await SetDefaultThemeAsync();
             return;
+        }
 
         await ReloadThemeAsync(theme);
         isDark = theme == "dark";
@@ -50,4 +53,5 @@
         await SetThemeAsync(theme);
         await SaveThemeAsync(theme);
     }
+    private async Task SetDefaultThemeAsync() => await ReloadThemeAsync("dark");
 }
