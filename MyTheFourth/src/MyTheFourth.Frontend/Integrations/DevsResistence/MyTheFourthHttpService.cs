@@ -128,9 +128,23 @@ IMyTheFourthService
             return Enumerable.Empty<Planet>();
     }
 
-    public Task<IEnumerable<Starship>> ListStarshipsAsync(int? page = null, int? pageSize = null)
+    public async Task<IEnumerable<Starship>> ListStarshipsAsync(int? page = null, int? pageSize = null)
     {
-        throw new NotImplementedException();
+         try
+        {
+            var response = await _client.GetAsync($"{MyTheFourthHttpServiceEndpoints.StarShipsEndpoint}?pageNumber={page ?? 1}&pageSize={pageSize ?? 10}");
+
+            var result = await response.GetContentData<StarshipListResponse>();
+
+            return  result?.Results?.Any() is true ? _mapper.Map<IEnumerable<Starship>>(result.Results) : Enumerable.Empty<Starship>();
+            
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+
+        }
+            return Enumerable.Empty<Starship>();
     }
 
     public Task<IEnumerable<Vehicle>> ListVehiclesAsync(int? page = null, int? pageSize = null)
@@ -150,6 +164,9 @@ public class DevResistenceMapper : Profile {
         .IncludeBase<MovieDataModel, MovieResume>();
 
         CreateMap<StarshipDataModel, StarshipResume>();
+
+        CreateMap<StarshipDataModel, Starship>()
+        .IncludeBase<StarshipDataModel, StarshipResume>();
 
         CreateMap<VehicleDataModel, VehicleResume>();
 
