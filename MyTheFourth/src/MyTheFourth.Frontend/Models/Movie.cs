@@ -12,13 +12,13 @@ public class Movie : MovieResume
 
     public DateTime ReleaseDate { get; set; }
 
-    public List<CharacterResume> Characters { get; set; }
+    public IEnumerable<CharacterResume> Characters { get; set; }
 
-    public List<PlanetResume> Planets { get; set; }
+    public IEnumerable<PlanetResume> Planets { get; set; }
 
-    public List<VehicleResume> Vehicles { get; set; }
+    public IEnumerable<VehicleResume> Vehicles { get; set; }
 
-    public List<StarshipResume> Starships { get; set; }
+    public IEnumerable<StarshipResume> Starships { get; set; }
 
     public Movie()
     {

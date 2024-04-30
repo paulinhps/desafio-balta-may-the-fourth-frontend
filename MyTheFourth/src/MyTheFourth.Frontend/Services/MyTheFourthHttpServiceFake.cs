@@ -12,7 +12,7 @@ public class MyTheFourthHttpServiceFake :
     private static Movie[] _movies = [
         new()
         {
-            Id = 1,
+            Id = "1",
             Slug = "the-rise-of-the-jedi",
             Title = "The Rise of the Jedi",
             Episode = 10,
@@ -115,17 +115,17 @@ Maiores laborum dolores dolorem neque suscipit excepturi animi vitae porro nemo 
             Movies = [
                 new()
                 {
-                    Id = 1,
+                    Id = "1",
                     Title = "The Battle of the Stars"
                 },
                 new()
                 {
-                    Id = 2,
+                    Id = "2",
                     Title = "Return of the Light"
                 },
                 new()
                 {
-                    Id = 3,
+                    Id = "3",
                     Title = "Warriors of the Shadow Realm"
                 }
             ]
@@ -164,17 +164,17 @@ Maiores laborum dolores dolorem neque suscipit excepturi animi vitae porro nemo 
             Movies = [
                 new()
                 {
-                    Id = 1,
+                    Id = "1",
                     Title = "The Galactic Quest"
                 },
                 new()
                 {
-                    Id = 2,
+                    Id = "2",
                     Title = "Rise of the Planetara"
                 },
                 new()
                 {
-                    Id = 3,
+                    Id = "3",
                     Title = "Echoes of the Stars"
                 }
             ]
@@ -199,12 +199,12 @@ Maiores laborum dolores dolorem neque suscipit excepturi animi vitae porro nemo 
             Movies = [
                 new()
                 {
-                    Id = 1,
+                    Id = "1",
                     Title = "The Return of the Voyager",
                 },
                 new()
                 {
-                    Id = 2,
+                    Id = "2",
                     Title = "Voyager's Endgame",
                 }
             ]
@@ -232,12 +232,12 @@ Maiores laborum dolores dolorem neque suscipit excepturi animi vitae porro nemo 
             Movies = [
                 new()
                 {
-                    Id = 1,
+                    Id = "1",
                     Title = "Galactic Odyssey"
                 },
                 new()
                 {
-                    Id = 2,
+                    Id = "2",
                     Title = "The Edge of the Universe"
                 }
             ]
@@ -247,7 +247,7 @@ Maiores laborum dolores dolorem neque suscipit excepturi animi vitae porro nemo 
     {
         await Task.Delay(Random.Shared.Next(500, 5000));
 
-        return _movies.FirstOrDefault(x => x.Id == int.Parse(movieId));
+        return _movies.FirstOrDefault(x => x.Id.Equals(movieId));
     }
 
     public async Task<IEnumerable<Movie>> ListMoviesAsync(int? page = null, int? pageSize = null)
