@@ -6,5 +6,5 @@ public static class MyTheFourthHttpServiceEndpoints
     public const string CharacterEndpoint = "/characters";
     public const string PlanetsEndpoint = "/planets";
     public const string StarshipsEndpoint = "/starships";
-    public const string VehiclesEndpoint = "/starships";
+    public const string VehiclesEndpoint = "/vehicles";
 }
