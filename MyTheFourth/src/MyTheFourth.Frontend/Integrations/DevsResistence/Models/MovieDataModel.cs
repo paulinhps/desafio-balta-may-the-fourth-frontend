@@ -63,6 +63,36 @@ public class StarshipDataModel
 
         [JsonPropertyName("name")]
         public string Name { get; set; } = null!;
+
+        [JsonPropertyName("height")]
+        public string Height { get; set; } = null!;
+
+        [JsonPropertyName("weight")]
+        public string Weight { get; set; } = null!;
+
+        [JsonPropertyName("hairColor")]
+        public string HairColor { get; set; } = null!;
+
+        [JsonPropertyName("skinColor")]
+        public string SkinColor { get; set; } = null!;
+
+        [JsonPropertyName("eyeColor")]
+        public string EyeColor { get; set; } = null!;
+
+        [JsonPropertyName("birthYear")]
+        public string BirthYear { get; set; } = null!;
+
+        [JsonPropertyName("gender")]
+        public string Gender { get; set; } = null!;
+
+        [JsonPropertyName("planetId")]
+        public int PlanetId { get; set; }
+
+        [JsonPropertyName("planet")]
+        public PlanetDataModel Planet { get; set; } = null!;
+
+        [JsonPropertyName("movies")]
+        public List<MovieDataModel> Movies { get; set; } = new();
     }
 
     public class PlanetDataModel

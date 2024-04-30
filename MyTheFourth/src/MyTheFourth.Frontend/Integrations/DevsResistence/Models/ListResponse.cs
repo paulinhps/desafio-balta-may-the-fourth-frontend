@@ -20,3 +20,7 @@ public abstract class ListResponse<T>{
 public class MovieListResponse : ListResponse<MovieDataModel> {
     
 }
+
+public class CharacterListResponse : ListResponse<CharacterDataModel> {
+    
+}

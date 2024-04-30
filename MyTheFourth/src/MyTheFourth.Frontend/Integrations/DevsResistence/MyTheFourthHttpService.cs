@@ -9,6 +9,7 @@ namespace MyTheFourth.Frontend.Integrations.DevsResistence;
 
 public static class MyTheFourthHttpServiceEndpoints {
     public const string MoviesEndpoint = "/movies";
+    public const string CharacterEndpoint = "/characters";
 }
 
 
@@ -26,9 +27,13 @@ IMyTheFourthService
 
     public string ServiceId => BackendServicesIdentifiers.DevResistence;
 
-    public Task<Character?> GetCharacterAsync(string characterId)
+    public async Task<Character?> GetCharacterAsync(string characterId)
     {
-        throw new NotImplementedException();
+        var response = await _client.GetAsync($"{MyTheFourthHttpServiceEndpoints.CharacterEndpoint}/{characterId}");
+
+            var result = await response.GetContentData<CharacterDataModel>();
+
+            return  result is not null ? _mapper.Map<Character>(result) : default!;
     }
 
     public async Task<Movie?> GetMovieAsync(string movieId)
@@ -55,9 +60,23 @@ IMyTheFourthService
         throw new NotImplementedException();
     }
 
-    public Task<IEnumerable<Character>> ListCharactersAsync(int? page = null, int? pageSize = null)
+    public async Task<IEnumerable<Character>> ListCharactersAsync(int? page = null, int? pageSize = null)
     {
-        throw new NotImplementedException();
+        try
+        {
+
+            var response = await _client.GetAsync($"{MyTheFourthHttpServiceEndpoints.CharacterEndpoint}?pageNumber={page ?? 1}&pageSize={pageSize ?? 10}");
+
+            var result = await response.GetContentData<CharacterListResponse>();
+
+            return  result?.Results?.Any() is true ? _mapper.Map<IEnumerable<Character>>(result.Results) : Enumerable.Empty<Character>();
+        }
+        catch (System.Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+
+        }
+            return Enumerable.Empty<Character>();
     }
 
     public async Task<IEnumerable<Movie>> ListMoviesAsync(int? page = null, int? pageSize = null)
@@ -74,7 +93,6 @@ IMyTheFourthService
         catch (System.Exception ex)
         {
             Console.WriteLine(ex.Message);
-            
 
         }
             return Enumerable.Empty<Movie>();
@@ -100,8 +118,11 @@ public class DevResistenceMapper : Profile {
 
     public DevResistenceMapper() {
 
-        CreateMap<MovieDataModel, Movie>()
+        CreateMap<MovieDataModel, MovieResume>()
         .ForMember(dest => dest.Id, opt => opt.MapFrom(dest => dest.Id.ToString()));
+
+        CreateMap<MovieDataModel, Movie>()
+        .IncludeBase<MovieDataModel, MovieResume>();
 
         CreateMap<StarshipDataModel, StarshipResume>();
 
@@ -110,6 +131,9 @@ public class DevResistenceMapper : Profile {
         CreateMap<PlanetDataModel, PlanetResume>();
 
         CreateMap<CharacterDataModel, CharacterResume>();
+
+        CreateMap<CharacterDataModel, Character>()
+        .IncludeBase<CharacterDataModel, CharacterResume>();
 
         
 
