@@ -3,6 +3,8 @@
 @inject IMoviesService MoviesService
 @attribute [StreamRendering]
 
+<ModuleNavigation CurrentPage="Filmes" Module="EPagesNavigationsKey.Home" />
+
 @if(Movies == null) 
 {
     <StarWarsLoader Text="Carregando..." />

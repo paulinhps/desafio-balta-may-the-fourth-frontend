@@ -40,6 +40,8 @@ builder.Services.AddBlazorBootstrap();
 
 
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+builder.Services.AddSingleton<IBreadcrumbItemService, BreadcrumbItemService>();
+builder.Services.AddSingleton<IBreadcrumbItemServiceEvents>(provider => provider.GetRequiredService<IBreadcrumbItemService>());
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 

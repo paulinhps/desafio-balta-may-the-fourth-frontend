@@ -1,0 +1,20 @@
+@inject IBreadcrumbItemServiceEvents BreadcrumbItemService
+
+<Breadcrumb Items="navItems" />
+
+@code {
+    private List<BreadcrumbItem> navItems = new();
+
+    protected override void OnInitialized() {
+        
+        BreadcrumbItemService.OnItemsChanged += UpdateItems;
+    }
+        private  void UpdateItems(object sender, BreadcrumbItemsEventArgs e)
+        {
+            navItems = e.Items?.ToList() ?? new();
+
+            StateHasChanged();
+        }
+
+
+}

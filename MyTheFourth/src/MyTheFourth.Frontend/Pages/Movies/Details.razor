@@ -3,19 +3,13 @@
 @inject IMoviesService MoviesService
 @attribute [StreamRendering]
 
+<PageTitle>Filmes</PageTitle>
+
 @if(Movie == null) {
     <StarWarsLoader Text="Carregando..." />
 }
 else {
-    <section>
-        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">🏚</a></li>
-                <li class="breadcrumb-item"><a href="/movies">Filmes</a></li>
-                <li class="breadcrumb-item active" aria-current="page">@Movie.Title</li>
-            </ol>
-        </nav>
-    </section>
+    <ModuleNavigation CurrentPage="@Movie.Title" Module="EPagesNavigationsKey.Movies" />
 
     <section class="team-single">
         <div class="row">

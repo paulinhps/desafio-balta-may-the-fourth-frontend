@@ -2,15 +2,21 @@
 
 @inject Blazored.LocalStorage.ILocalStorageService localStorage
 @inject IJSRuntime JSRuntime
+@inject IBreadcrumbItemService BreadcrumbItemService
 @attribute [StreamRendering]
 
-<PageTitle>Home</PageTitle>
-
+<ModuleNavigation CurrentPage="Início" Module="EPagesNavigationsKey.None" />
 <h1>Welcome my friend</h1>
 
 @code {
     [Inject] protected ToastService ToastService { get; set; } = default!;
 
+    protected override void OnInitialized() {
+
+        BreadcrumbItemService.UpdateBreadcrumbs(new BreadcrumbItem{ Text = "Home", Href ="/" },
+            new BreadcrumbItem{ Text = "Docs", Href ="/docs" },
+            new BreadcrumbItem{ Text = "Breadcrumb", IsCurrentPage = true });
+    }
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)

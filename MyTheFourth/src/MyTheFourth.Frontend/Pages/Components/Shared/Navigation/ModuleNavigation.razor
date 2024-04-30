@@ -1,0 +1,40 @@
+@inject IBreadcrumbItemService BreadcrumbItemService
+
+<PageTitle>@pageTitle</PageTitle>
+
+
+@code {
+    [Parameter]
+    public EPagesNavigationsKey Module {get; set;} = EPagesNavigationsKey.None;
+
+    [Parameter]
+    public string? CurrentPage {get; set;} = string.Empty;
+
+    private string pageTitle
+    {
+        get
+        {
+            return $"starls | {GetModuleName()} {CurrentPage}";
+        }
+    }
+
+    private string GetModuleName() {
+        return Module switch {
+            EPagesNavigationsKey.None => string.Empty,
+            EPagesNavigationsKey.Home => string.Empty,
+            _ => ((PagesNavigationModule)Module).Name
+        };
+    }
+
+    protected override void OnInitialized(){
+
+        if(Module == EPagesNavigationsKey.None) {
+            BreadcrumbItemService.UpdateHasEmpty();
+        }
+        else {
+            PagesNavigationModule module = Module;
+
+            BreadcrumbItemService.UpdateBreadcrumbs([..module.NavigationItems, new BreadcrumbItem{ Text = CurrentPage, IsCurrentPage = true }]);
+        }
+    }
+}
