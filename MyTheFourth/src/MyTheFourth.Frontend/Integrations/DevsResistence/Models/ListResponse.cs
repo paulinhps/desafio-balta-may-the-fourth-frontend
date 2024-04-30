@@ -28,3 +28,7 @@ public class CharacterListResponse : ListResponse<CharacterDataModel> {
 public class PlanetListResponse : ListResponse<PlanetDataModel> {
     
 }
+
+public class StarshipListResponse : ListResponse<StarshipDataModel> {
+    
+}
