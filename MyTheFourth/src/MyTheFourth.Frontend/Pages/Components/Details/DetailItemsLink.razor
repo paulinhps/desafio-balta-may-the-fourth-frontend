@@ -1,0 +1,12 @@
+﻿
+<a href="@LabelUrl">@LabelValue</a> &nbsp
+
+@code {
+    [Parameter]
+    [EditorRequired]
+    public string LabelValue { get; set; }
+
+    [Parameter]
+    [EditorRequired]
+    public string LabelUrl { get; set; }
+}

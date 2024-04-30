@@ -4,194 +4,44 @@
 @attribute [StreamRendering]
 
 
-@if(Planet == null) {
+@if (Planet == null)
+{
     <StarWarsLoader Text="Carregando..." />
 }
-else {
-    <section>
-        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">🏚</a></li>
-                <li class="breadcrumb-item"><a href="/planets">Planetas</a></li>
-                <li class="breadcrumb-item active" aria-current="page">@Planet.Name</li>
-            </ol>
-        </nav>
-    </section>
+else
+{
+    <Navigator Home="🏚" Url="/planets" UrlName="Planetas" PageName="@Planet.Name" />
+    <MainDetails Name="@Planet.Name">
+        <ChildContent>
+            <DetailItems LabelName="Clima" LabelValue="@Planet.Climate" />
+            <DetailItems LabelName="Diaetro" LabelValue="@Planet.Diameter" />
+            <DetailItems LabelName="Período Rotação" LabelValue="@Planet.RotationPeriod" />
+            <DetailItems LabelName="Período Orbital" LabelValue="@Planet.OrbitalPeriod" />
+            <DetailItems LabelName="Gravidade" LabelValue="@Planet.Gravity" />
+            <DetailItems LabelName="Terreno" LabelValue="@Planet.Terrain" />
+            <DetailItems LabelName="Superfície de água" LabelValue="@Planet.SurfaceWater" />
+            <DetailItems LabelName="População" LabelValue="@Planet.Population" />
 
-    <section class="team-single">
-        <div class="row">
+             <DetailItemsTitle LabelName="Personagens">
+                @{
+                    foreach (var character in Planet.Characters)
+                    {
+                        <DetailItemsLink LabelValue="@character.Name" LabelUrl="@($"/characters/{character.Slug ?? character.Id.ToString()}")" />
+                    }
+                }
+            </DetailItemsTitle>
+            <p></p>
+            <DetailItemsTitle LabelName="Filmes">
+                @{
+                    foreach (var movie in Planet.Movies)
+                    {
+                        <DetailItemsLink LabelValue="@movie.Title" LabelUrl="@($"/movies/{movie.Slug ?? movie.Id.ToString()}")" />
+                    }
+                }
+            </DetailItemsTitle>
 
-            <div class="col-lg-8 col-md-7">
-                <div class="team-single-text padding-50px-left sm-no-padding-left">
-                    <h1 class="font-size38 sm-font-size32 xs-font-size30">@Planet.Name</h1>
-
-                    <h5 class="font-size24 sm-font-size22 xs-font-size20 mb-2">Detalhes</h5>
-                    <div class="contact-info-section margin-40px-tb mt-4">
-                        <ul class="list-style9 no-margin">
-                            <li>
-
-                                <div class="row">
-                                    <div class="col-md-5 col-5">
-                                        <i class="far fa-gem text-yellow"></i>
-                                        <strong class="margin-10px-left text-yellow">Clima:</strong>
-                                    </div>
-                                    <div class="col-md-7 col-7">
-                                        <p>@Planet.Climate</p>
-                                    </div>
-                                </div>
-
-                            </li>
-                            <li>
-
-                                <div class="row">
-                                    <div class="col-md-5 col-5">
-                                        <i class="far fa-file text-lightred"></i>
-                                        <strong class="margin-10px-left text-lightred">Diaetro:</strong>
-                                    </div>
-                                    <div class="col-md-7 col-7">
-                                        <p>@Planet.Diameter</p>
-                                    </div>
-                                </div>
-
-                            </li>
-                            <li>
-
-                                <div class="row">
-                                    <div class="col-md-5 col-5">
-                                        <i class="fas fa-map-marker-alt text-green"></i>
-                                        <strong class="margin-10px-left text-green">Período Rotação:</strong>
-                                    </div>
-                                    <div class="col-md-7 col-7">
-                                        <p>@Planet.RotationPeriod</p>
-                                    </div>
-                                </div>
-
-                            </li>
-                            <li>
-
-                                <div class="row">
-                                    <div class="col-md-5 col-5">
-                                        <i class="fas fa-map-marker-alt text-green"></i>
-                                        <strong class="margin-10px-left text-green">Período Orbital:</strong>
-                                    </div>
-                                    <div class="col-md-7 col-7">
-                                        <p>@Planet.OrbitalPeriod</p>
-                                    </div>
-                                </div>
-
-                            </li>
-                            <li>
-
-                                <div class="row">
-                                    <div class="col-md-5 col-5">
-                                        <i class="fas fa-map-marker-alt text-green"></i>
-                                        <strong class="margin-10px-left text-green">Gravidade:</strong>
-                                    </div>
-                                    <div class="col-md-7 col-7">
-                                        <p>@Planet.Gravity</p>
-                                    </div>
-                                </div>
-
-                            </li>
-                            <li>
-
-                                <div class="row">
-                                    <div class="col-md-5 col-5">
-                                        <i class="fas fa-map-marker-alt text-green"></i>
-                                        <strong class="margin-10px-left text-green">Terreno:</strong>
-                                    </div>
-                                    <div class="col-md-7 col-7">
-                                        <p>@Planet.Terrain</p>
-                                    </div>
-                                </div>
-
-                            </li>
-                            <li>
-
-                                <div class="row">
-                                    <div class="col-md-5 col-5">
-                                        <i class="fas fa-map-marker-alt text-green"></i>
-                                        <strong class="margin-10px-left text-green">Superfície de água:</strong>
-                                    </div>
-                                    <div class="col-md-7 col-7">
-                                        <p>@Planet.SurfaceWater</p>
-                                    </div>
-                                </div>
-
-                            </li>
-                            <li>
-
-                                <div class="row">
-                                    <div class="col-md-5 col-5">
-                                        <i class="fas fa-map-marker-alt text-green"></i>
-                                        <strong class="margin-10px-left text-green">População:</strong>
-                                    </div>
-                                    <div class="col-md-7 col-7">
-                                        <p>@Planet.Population</p>
-                                    </div>
-                                </div>
-
-                            </li>
-                            <li>
-
-                                <div class="row">
-                                    <div class="col-md-5 col-5">
-                                        <i class="fas fa-map-marker-alt text-green"></i>
-                                        <strong class="margin-10px-left text-green">Personagens:</strong>
-                                    </div>
-                                    <div class="col-md-7 col-7">
-                                        @foreach (var plan in @Planet.Characters)
-                                        {
-                                            <p> @plan.Name </p>
-                                        }
-                                    </div>
-                                </div>
-
-                            </li>
-                            <li>
-
-                                <div class="row">
-                                    <div class="col-md-5 col-5">
-                                        <i class="fas fa-map-marker-alt text-green"></i>
-                                        <strong class="margin-10px-left text-green">Filmes:</strong>
-                                    </div>
-                                    <div class="col-md-7 col-7">
-                                        @foreach (var movi in @Planet.Movies)
-                                        {
-                                            <p> @movi.Title </p>
-                                        }
-                                    </div>
-                                </div>
-
-                            </li>
-                          
-                        </ul>
-                    </div>
-
-                </div>
-            </div>
-            
-        </div>
-    </section>
-    <section id="movies">
-        <div class="row">
-            <div class="col-lg-8 col-md-7">
-                <div class="team-single-text padding-50px-left sm-no-padding-left">
-
-                    <h5 class="font-size24 sm-font-size22 xs-font-size20 mb-2">Filmes que Participou</h5>
-                    <div class="contact-info-section margin-40px-tb mt-4">
-                        <Catalog>
-                            @foreach (MovieResume movie in Planet.Movies) 
-                            {
-                                <CatalogDetail ImgUrl="@movie.ImgUrl" Name="@movie.Title" Link="@($"/movies/{movie.Slug ?? movie.Id.ToString()}")"/>
-                            }
-                        </Catalog>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </section>
+        </ChildContent>
+    </MainDetails>
 }
 
 @code {
@@ -200,8 +50,9 @@ else {
 
     private Planet? Planet = null;
 
-    protected override async Task OnInitializedAsync() {
+    protected override async Task OnInitializedAsync()
+    {
 
         Planet = await PlanetsService.GetPlanetAsync(planetId);
     }
-}    
+}

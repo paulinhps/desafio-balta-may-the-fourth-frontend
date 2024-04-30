@@ -1,0 +1,28 @@
+﻿
+<section class="team-single">
+    <div class="row">
+
+        <div class="col-lg-8 col-md-7">
+            <div class="team-single-text padding-50px-left sm-no-padding-left">
+                <h1 class="font-size38 sm-font-size32 xs-font-size30">@Name</h1>
+
+                <h5 class="font-size24 sm-font-size22 xs-font-size20 mb-2">Detalhes</h5>
+                <div class="contact-info-section margin-40px-tb mt-4">
+                    <ul class="list-style9 no-margin">
+                        @ChildContent
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+@code {
+
+    [Parameter]
+    public string? Name { get; set; }  
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+}

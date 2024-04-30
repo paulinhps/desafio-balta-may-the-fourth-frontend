@@ -1,0 +1,21 @@
+﻿<li>
+    <div class="row">
+        <div class="col-md-5 col-5">
+            <i class="far fa-gem text-yellow"></i>
+            <strong class="margin-10px-left text-yellow">@LabelName:</strong>
+        </div>
+        <div class="col-md-7 col-7">
+            <p>@LabelValue</p>
+        </div>
+    </div>
+</li>
+
+@code {
+
+    [Parameter]
+    [EditorRequired]
+    public string LabelName { get; set; }
+    [Parameter]
+    [EditorRequired]
+    public string LabelValue { get; set; }
+}
