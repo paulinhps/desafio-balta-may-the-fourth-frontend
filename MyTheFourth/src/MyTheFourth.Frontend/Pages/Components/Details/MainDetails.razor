@@ -15,7 +15,7 @@
 
             </div>
         </div>
-
+        @ChildImage
     </div>
 </section>
 
@@ -25,4 +25,6 @@
     public string? Name { get; set; }  
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
+    [Parameter]
+    public RenderFragment? ChildImage { get; set; }
 }
