@@ -6,12 +6,12 @@ namespace MyTheFourth.Frontend.Http.Handlers;
 
 public class BackendHandler : DelegatingHandler
 {
-    
+
     protected override async Task<HttpResponseMessage> SendAsync(
         HttpRequestMessage request,
         CancellationToken cancellationToken)
     {
-        
+
         try
         {
             return await base.SendAsync(request, cancellationToken);
@@ -30,7 +30,7 @@ public class BackendHandler : DelegatingHandler
             return errorResponse;
         }
 
-       
+
 
     }
 

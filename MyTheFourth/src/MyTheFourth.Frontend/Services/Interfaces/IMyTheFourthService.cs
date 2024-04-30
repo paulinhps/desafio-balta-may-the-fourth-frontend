@@ -1,12 +1,12 @@
 namespace MyTheFourth.Frontend.Services.Interfaces;
 
-public interface IMyTheFourthService : 
+public interface IMyTheFourthService :
     IMoviesService,
     ICharactersService,
     IPlanetsService,
     IVehiclesService,
     IStarshipsService
 {
-    
+
     string ServiceId { get; }
 }

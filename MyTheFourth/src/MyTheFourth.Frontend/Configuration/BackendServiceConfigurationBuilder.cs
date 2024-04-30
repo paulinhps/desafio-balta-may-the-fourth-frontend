@@ -77,11 +77,11 @@ public class BackendServiceConfigurationBuilder : IBackendServiceConfigurationBu
         try
         {
             foreach (var type in servicesImplementationList)
-        {
-            AddApiService(type);
+            {
+                AddApiService(type);
+            }
         }
-        }
-        catch(Exception ex )
+        catch (Exception ex)
         {
             throw new ApiConfigurationException("an eror occour on registry backend api service", ex);
         }
@@ -90,18 +90,19 @@ public class BackendServiceConfigurationBuilder : IBackendServiceConfigurationBu
 
     public IBackendServiceConfigurationBuilder AddHttpClient<TService>(string apiServiceId, Action<IServiceProvider, HttpClient>? configAction = null) where TService : class
     {
-        _services.AddHttpClient<TService>((provider, httpClient) => {
-           var apiServiceConfiguration = provider.GetRequiredService<IApiConfigurationServiceCollection>();
-           ApiConfiguration? apiConfiguration = apiServiceConfiguration?.GetConfiguration(apiServiceId);
+        _services.AddHttpClient<TService>((provider, httpClient) =>
+        {
+            var apiServiceConfiguration = provider.GetRequiredService<IApiConfigurationServiceCollection>();
+            ApiConfiguration? apiConfiguration = apiServiceConfiguration?.GetConfiguration(apiServiceId);
 
-           if(apiConfiguration == null) throw new ApiConfigurationException($"O Id de serviço {apiServiceId} não está configurado ou não existe");
+            if (apiConfiguration == null) throw new ApiConfigurationException($"O Id de serviço {apiServiceId} não está configurado ou não existe");
             httpClient.BaseAddress = new Uri(apiConfiguration!.BaseAddress);
 
             configAction?.Invoke(provider, httpClient);
         })
         .AddHttpMessageHandler(provider => provider.GetService<BackendHandler>()!);
 
-return this;
+        return this;
 
     }
 }

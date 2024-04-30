@@ -9,7 +9,7 @@ using MyTheFourth.Frontend.Configuration;
 using MyTheFourth.Frontend.Constants;
 using MyTheFourth.Frontend.DependencyInjections;
 using MyTheFourth.Frontend.Services;
-using DevResistence = MyTheFourth.Frontend.Integrations.DevsResistence;
+using DevResistence = MyTheFourth.Frontend.DevsResistenceContext;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
@@ -22,7 +22,7 @@ builder.Services.AddTransient<MyTheFourthHttpServiceFake>();
 builder.Services.AddTransient<MyTheFourthHttpServiceFake2>();
 
 builder.AddBackendProviders(assemblies: Assembly.GetExecutingAssembly())
-       .AddApi<DevResistence.MyTheFourthHttpService>(BackendServicesIdentifiers.DevResistence);
+       .AddApi<DevResistence.Services.MyTheFourthHttpService>(BackendServicesIdentifiers.DevResistence);
 
 builder.Services.AddBlazoredLocalStorage(config =>
 {
@@ -46,11 +46,13 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.
 await builder.Build().RunAsync();
 
 
-public static class BackendApiServiceExtensions {
+public static class BackendApiServiceExtensions
+{
 
-    public static IBackendServiceConfigurationBuilder AddApi<TService>(this IBackendServiceConfigurationBuilder backendBuilder, string apiServiceId) where TService : class{
+    public static IBackendServiceConfigurationBuilder AddApi<TService>(this IBackendServiceConfigurationBuilder backendBuilder, string apiServiceId) where TService : class
+    {
 
-    return backendBuilder.AddHttpClient<TService>(apiServiceId);
+        return backendBuilder.AddHttpClient<TService>(apiServiceId);
 
     }
 }
@@ -69,5 +71,5 @@ internal class ApiConfigurationException : Exception
     public ApiConfigurationException(string? message, Exception? innerException) : base(message, innerException)
     {
     }
-    
+
 }
