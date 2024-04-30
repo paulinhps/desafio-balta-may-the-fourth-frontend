@@ -24,3 +24,7 @@ public class MovieListResponse : ListResponse<MovieDataModel> {
 public class CharacterListResponse : ListResponse<CharacterDataModel> {
     
 }
+
+public class PlanetListResponse : ListResponse<PlanetDataModel> {
+    
+}
