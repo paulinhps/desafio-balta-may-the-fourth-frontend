@@ -10,6 +10,8 @@ namespace MyTheFourth.Frontend.Integrations.DevsResistence;
 public static class MyTheFourthHttpServiceEndpoints {
     public const string MoviesEndpoint = "/movies";
     public const string CharacterEndpoint = "/characters";
+    public const string PlanetsEndpoint = "/planets";
+    public const string StarShipsEndpoint = "/starships";
 }
 
 
@@ -31,28 +33,37 @@ IMyTheFourthService
     {
         var response = await _client.GetAsync($"{MyTheFourthHttpServiceEndpoints.CharacterEndpoint}/{characterId}");
 
-            var result = await response.GetContentData<CharacterDataModel>();
+        var result = await response.GetContentData<CharacterDataModel>();
 
-            return  result is not null ? _mapper.Map<Character>(result) : default!;
+        return  result is not null ? _mapper.Map<Character>(result) : default!;
     }
 
     public async Task<Movie?> GetMovieAsync(string movieId)
     {
-            var response = await _client.GetAsync($"{MyTheFourthHttpServiceEndpoints.MoviesEndpoint}/{movieId}");
+        var response = await _client.GetAsync($"{MyTheFourthHttpServiceEndpoints.MoviesEndpoint}/{movieId}");
 
-            var result = await response.GetContentData<MovieDataModel>();
+        var result = await response.GetContentData<MovieDataModel>();
 
-            return  result is not null ? _mapper.Map<Movie>(result) : default!;
+        return  result is not null ? _mapper.Map<Movie>(result) : default!;
     }
 
-    public Task<Planet?> GetPlanetAsync(string planetId)
+    public async Task<Planet?> GetPlanetAsync(string planetId)
     {
-        throw new NotImplementedException();
+        var response = await _client.GetAsync($"{MyTheFourthHttpServiceEndpoints.PlanetsEndpoint}/{planetId}");
+
+        var result = await response.GetContentData<PlanetDataModel>();
+
+        return  result is not null ? _mapper.Map<Planet>(result) : default!;
+
     }
 
-    public Task<Starship?> GetStarshipAsync(string starshipId)
+    public async Task<Starship?> GetStarshipAsync(string starshipId)
     {
-        throw new NotImplementedException();
+        var response = await _client.GetAsync($"{MyTheFourthHttpServiceEndpoints.StarShipsEndpoint}/{starshipId}");
+
+        var result = await response.GetContentData<StarshipDataModel>();
+
+        return  result is not null ? _mapper.Map<Starship>(result) : default!;
     }
 
     public Task<Vehicle?> GetVehicleAsync(string vehicleId)
@@ -64,14 +75,14 @@ IMyTheFourthService
     {
         try
         {
-
             var response = await _client.GetAsync($"{MyTheFourthHttpServiceEndpoints.CharacterEndpoint}?pageNumber={page ?? 1}&pageSize={pageSize ?? 10}");
 
             var result = await response.GetContentData<CharacterListResponse>();
 
             return  result?.Results?.Any() is true ? _mapper.Map<IEnumerable<Character>>(result.Results) : Enumerable.Empty<Character>();
+            
         }
-        catch (System.Exception ex)
+        catch (Exception ex)
         {
             Console.WriteLine(ex.Message);
 
@@ -98,9 +109,23 @@ IMyTheFourthService
             return Enumerable.Empty<Movie>();
     }
 
-    public Task<IEnumerable<Planet>> ListPlanetsAsync(int? page = null, int? pageSize = null)
+    public async Task<IEnumerable<Planet>> ListPlanetsAsync(int? page = null, int? pageSize = null)
     {
-        throw new NotImplementedException();
+         try
+        {
+            var response = await _client.GetAsync($"{MyTheFourthHttpServiceEndpoints.PlanetsEndpoint}?pageNumber={page ?? 1}&pageSize={pageSize ?? 10}");
+
+            var result = await response.GetContentData<PlanetListResponse>();
+
+            return  result?.Results?.Any() is true ? _mapper.Map<IEnumerable<Planet>>(result.Results) : Enumerable.Empty<Planet>();
+            
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+
+        }
+            return Enumerable.Empty<Planet>();
     }
 
     public Task<IEnumerable<Starship>> ListStarshipsAsync(int? page = null, int? pageSize = null)
@@ -129,6 +154,9 @@ public class DevResistenceMapper : Profile {
         CreateMap<VehicleDataModel, VehicleResume>();
 
         CreateMap<PlanetDataModel, PlanetResume>();
+
+         CreateMap<PlanetDataModel, Planet>()
+        .IncludeBase<PlanetDataModel, PlanetResume>();
 
         CreateMap<CharacterDataModel, CharacterResume>();
 
