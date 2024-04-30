@@ -31,9 +31,13 @@ IMyTheFourthService
         throw new NotImplementedException();
     }
 
-    public Task<Movie?> GetMovieAsync(string movieId)
+    public async Task<Movie?> GetMovieAsync(string movieId)
     {
-        throw new NotImplementedException();
+            var response = await _client.GetAsync($"{MyTheFourthHttpServiceEndpoints.MoviesEndpoint}/{movieId}");
+
+            var result = await response.GetContentData<MovieDataModel>();
+
+            return  result is not null ? _mapper.Map<Movie>(result) : default!;
     }
 
     public Task<Planet?> GetPlanetAsync(string planetId)
@@ -60,11 +64,12 @@ IMyTheFourthService
     {
         try
         {
-            var response = await _client.GetAsync($"{MyTheFourthHttpServiceEndpoints.MoviesEndpoint}");
 
-            var result = await response.GetContentData<IEnumerable<MovieDataModel>>() ?? Enumerable.Empty<MovieDataModel>();
+            var response = await _client.GetAsync($"{MyTheFourthHttpServiceEndpoints.MoviesEndpoint}?pageNumber={page ?? 1}&pageSize={pageSize ?? 10}");
 
-            return _mapper.Map<IEnumerable<Movie>>(result);
+            var result = await response.GetContentData<MovieListResponse>();
+
+            return  result?.Results?.Any() is true ? _mapper.Map<IEnumerable<Movie>>(result.Results) : Enumerable.Empty<Movie>();
         }
         catch (System.Exception ex)
         {
@@ -97,6 +102,18 @@ public class DevResistenceMapper : Profile {
 
         CreateMap<MovieDataModel, Movie>()
         .ForMember(dest => dest.Id, opt => opt.MapFrom(dest => dest.Id.ToString()));
+
+        CreateMap<StarshipDataModel, StarshipResume>();
+
+        CreateMap<VehicleDataModel, VehicleResume>();
+
+        CreateMap<PlanetDataModel, PlanetResume>();
+
+        CreateMap<CharacterDataModel, CharacterResume>();
+
+        
+
+
 
     }
 }
