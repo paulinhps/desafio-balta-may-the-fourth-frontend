@@ -1,0 +1,93 @@
+html {
+    overflow: hidden;
+}
+
+html::before {
+    content: '';
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    min-height: 60vh;
+    background-image: linear-gradient(0deg, transparent, black 75%);
+    z-index: 1;
+}
+
+.star-wars {
+    padding: 0 !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100vh;
+    color: #feda4a;
+    font-family: 'Pathway Gothic One', sans-serif !important;
+    font-size: 500%;
+    font-weight: 600;
+    letter-spacing: 6px;
+    line-height: 150%;
+    perspective: 100px;
+    text-align: justify;
+}
+
+a {
+    color: inherit; /* Herda a cor do texto do elemento pai */
+    text-decoration: underline; /* Mantém apenas o sublinhado */
+}
+
+.title {
+    font-family: 'Star Jedi Hollow', sans-serif !important;
+    font-size: 250%;
+}
+
+.crawl {
+    transform-origin: bottom;
+    width: 90%;
+    animation: crawl 110s linear forwards; /* velocidade texto */
+}
+
+.crawl > .title {
+    font-size: 90%;
+    text-align: center;
+}
+
+.crawl > .title h1 {
+    margin: 0 0 100px;
+    text-transform: uppercase;
+}
+
+.history {
+    margin-bottom: 8rem;
+}
+
+@keyframes crawl {
+    0% {
+        transform: rotateX(20deg) translateY(100%);
+    }
+    100% {
+        transform: rotateX(25deg) translateY(-100%);
+    }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .star-wars {
+        font-size: 300%; /* Reduz o tamanho da fonte para dispositivos menores */
+        letter-spacing: 4px; /* Ajusta o espaçamento entre letras */
+    }
+
+    .crawl > .title h1 {
+        margin: 0 0 50px; /* Ajusta o espaço abaixo do título */
+    }
+}
+
+@media (max-width: 480px) {
+    .star-wars {
+        font-size: 200%; /* Mais redução para telas muito pequenas */
+        letter-spacing: 2px;
+    }
+
+    .crawl > .title h1 {
+        margin: 0 0 30px;
+    }
+}

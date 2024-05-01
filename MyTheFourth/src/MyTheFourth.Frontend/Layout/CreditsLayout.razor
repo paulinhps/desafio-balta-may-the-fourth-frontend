@@ -1,0 +1,40 @@
+﻿@inherits LayoutComponentBase
+@inject NavigationManager NavigationManager
+
+<div class="custom-layout">
+    <header>
+        <nav>
+            <a href="#" @onclick="NavigateHome" class="nav-link py-3 px-4" aria-current="page" title=""
+               data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Home">
+                <span class="bi bi-house-door-fill fs-4" aria-hidden="true"></span>
+            </a>
+        </nav>
+    </header>
+
+    <main>
+        @Body
+    </main>
+
+    <style>
+        body {
+            background: #000000 url(https://cssanimation.rocks/demo/starwars/images/bg.jpg) no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        .nav-link {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            text-decoration: none;
+            color: #feda4a;
+            z-index: 1000; /* Aumente este valor conforme necessário */
+        }
+    </style>
+</div>
+
+@code {
+    private void NavigateHome()
+    {
+        NavigationManager.NavigateTo("/");
+    }
+}
