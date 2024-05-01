@@ -5,97 +5,29 @@
 
 <PageTitle>Filmes</PageTitle>
 
-@if(Movie == null) {
+@if (Movie == null)
+{
     <StarWarsLoader Text="Carregando..." />
 }
-else {
-    <ModuleNavigation CurrentPage="@Movie.Title" Module="EPagesNavigationsKey.Movies" />
-
-    <section class="team-single">
-        <div class="row">
-
-            <div class="col-lg-8 col-md-7">
-                <div class="team-single-text padding-50px-left sm-no-padding-left">
-                    <h1 class="font-size38 sm-font-size32 xs-font-size30">@Movie.Title</h1>
-                    <h5 class="font-size24 sm-font-size22 xs-font-size20 mb-2">Detalhes</h5>
-
-                    <div class="contact-info-section margin-40px-tb mt-4">
-                        <ul class="list-style9 no-margin">
-                            <li>
-
-                                <div class="row">
-                                    <div class="col-md-5 col-5">
-                                        <i class="fas fa-graduation-cap text-orange"></i>
-                                        <strong class="margin-10px-left text-orange">Episódio:</strong>
-                                    </div>
-                                    <div class="col-md-7 col-7">
-                                        <p>@Movie.Episode</p>
-                                    </div>
-                                </div>
-
-                            </li>
-                            <li>
-
-                                <div class="row">
-                                    <div class="col-md-5 col-5">
-                                        <i class="far fa-gem text-yellow"></i>
-                                        <strong class="margin-10px-left text-yellow">Diretor:</strong>
-                                    </div>
-                                    <div class="col-md-7 col-7">
-                                        <p>@Movie.Director</p>
-                                    </div>
-                                </div>
-
-                            </li>
-                            <li>
-
-                                <div class="row">
-                                    <div class="col-md-5 col-5">
-                                        <i class="far fa-file text-lightred"></i>
-                                        <strong class="margin-10px-left text-lightred">Produtor:</strong>
-                                    </div>
-                                    <div class="col-md-7 col-7">
-                                        <p>@Movie.Producer</p>
-                                    </div>
-                                </div>
-
-                            </li>
-                            <li>
-
-                                <div class="row">
-                                    <div class="col-md-5 col-5">
-                                        <i class="fas fa-map-marker-alt text-green"></i>
-                                        <strong class="margin-10px-left text-green">Data Lançamento:</strong>
-                                    </div>
-                                    <div class="col-md-7 col-7">
-                                        <p>@Movie.ReleaseDate</p>
-                                    </div>
-                                </div>
-
-                            </li>
-                            
-                        </ul>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-5 xs-margin-30px-bottom">
-                <div class="team-single-img">
-                    <img style="max-width: 315px; width: 100%;" src="@Movie.ImgUrl" alt="@Movie.Title">
-                </div>
-            </div>
-
-        </div>
-    </section>
-    
+else
+{
+    <Navigator Home="🏚" Url="/movies" UrlName="Filmes" PageName="@Movie.Title" />
+    <MainDetails Name="@Movie.Title">
+        <ChildContent>
+            <DetailItems LabelName="Episódio" LabelValue="@Movie.Episode.ToString()" />
+            <DetailItems LabelName="Diretor" LabelValue="@Movie.Director" />
+            <DetailItems LabelName="Produtor" LabelValue="@Movie.Producer" />
+            <DetailItems LabelName="Data Lançamento" LabelValue="@Movie.ReleaseDate.ToString("d")" />
+        </ChildContent>
+        <ChildImage>
+            <DetailImage LabelName="@Movie.Title" LabelImgUrl="@Movie.ImgUrl" />
+        </ChildImage>
+    </MainDetails>
 }
 
 @code {
     [Parameter]
     public string movieId { get; set; } = null!;
-
     private Movie? Movie { get; set; }
-
     protected override async Task OnInitializedAsync() => Movie = await MoviesService.GetMovieAsync(movieId);
 }    
