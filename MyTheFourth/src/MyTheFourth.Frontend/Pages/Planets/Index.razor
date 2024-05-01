@@ -3,6 +3,8 @@
 @inject IPlanetsService planetService
 @attribute [StreamRendering]
 
+<ModuleNavigation CurrentPage="Planetas" Module="EPagesNavigationsKey.Home" />
+
 @if (Planets == null)
 {
     <StarWarsLoader Text="Carregando..." />

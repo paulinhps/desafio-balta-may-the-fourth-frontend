@@ -3,6 +3,8 @@
 @inject IStarshipsService StarshipsService
 @attribute [StreamRendering]
 
+<ModuleNavigation CurrentPage="Naves" Module="EPagesNavigationsKey.Home" />
+
 @if(Starships == null) 
 {
     <StarWarsLoader Text="Carregando..." />

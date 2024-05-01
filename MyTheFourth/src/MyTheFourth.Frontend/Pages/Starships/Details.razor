@@ -7,7 +7,7 @@
     <StarWarsLoader Text="Carregando..." />
 }
 else {
-    
+    <ModuleNavigation CurrentPage="@Starship.Name" Module="EPagesNavigationsKey.Starships" />
     <MainDetails Name="@Starship.Name">
         <ChildContent>
             <DetailItems LabelName="Modelo" LabelValue="@Starship.Model" />
@@ -22,10 +22,16 @@ else {
             <DetailItems LabelName="MGLT" LabelValue="@Starship.Mglt" />
             <DetailItems LabelName="Consumíveis" LabelValue="@Starship.Consumables" />
             <DetailItems LabelName="Classe" LabelValue="@Starship.Class" />
+
+            <DetailItemsTitle LabelName="Filmes">
+                @{
+                    foreach (var character in Starship.Movies)
+                    {
+                        <DetailItemsLink LabelValue="@character.Title" LabelUrl="@($"/movies/{character.Slug ?? character.Id.ToString()}")" />
+                    }
+                }
+            </DetailItemsTitle>
         </ChildContent>
-        <ChildImage>
-            <DetailImage LabelName="@Starship.Name" LabelImgUrl="@Starship.ImgUrl" />
-        </ChildImage>
     </MainDetails>
 
 }

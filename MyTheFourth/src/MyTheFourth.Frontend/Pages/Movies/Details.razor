@@ -18,10 +18,48 @@ else
             <DetailItems LabelName="Diretor" LabelValue="@Movie.Director" />
             <DetailItems LabelName="Produtor" LabelValue="@Movie.Producer" />
             <DetailItems LabelName="Data Lançamento" LabelValue="@Movie.ReleaseDate.ToString("d")" />
+            
+            <DetailItemsTitle LabelName="Personagens">
+                @{
+                    foreach (var character in Movie.Characters)
+                    {
+                        <DetailItemsLink LabelValue="@character.Name" LabelUrl="@($"/characters/{character.Slug ?? character.Id.ToString()}")" />
+                    }
+                }
+            </DetailItemsTitle>
+
+            <DetailItemsTitle LabelName="Planetas">
+                @{
+                    foreach (var plan in Movie.Planets)
+                    {
+                        <DetailItemsLink LabelValue="@plan.Name" LabelUrl="@($"/planets/{plan.Slug ?? plan.Id.ToString()}")" />
+                    }
+                }
+            </DetailItemsTitle>
+            
+            <DetailItemsTitle LabelName="Naves">
+                @{
+                    foreach (var starship in Movie.Starships)
+                    {
+                        <DetailItemsLink LabelValue="@starship.Name" LabelUrl="@($"/starships/{starship.Slug ?? starship.Id.ToString()}")" />
+                    }
+                }
+            </DetailItemsTitle>
+            
+            <DetailItemsTitle LabelName="Veículos">
+                @{
+                    foreach (var vehicle in Movie.Vehicles)
+                    {
+                        <DetailItemsLink LabelValue="@vehicle.Name" LabelUrl="@($"/vehicles/{vehicle.Slug ?? vehicle.Id.ToString()}")" />
+                    }
+                }
+            </DetailItemsTitle>
+
+
         </ChildContent>
-        <ChildImage>
+       @*  <ChildImage>
             <DetailImage LabelName="@Movie.Title" LabelImgUrl="@Movie.ImgUrl" />
-        </ChildImage>
+        </ChildImage> *@
     </MainDetails>
 }
 

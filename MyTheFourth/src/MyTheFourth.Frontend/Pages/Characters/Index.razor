@@ -3,6 +3,8 @@
 @inject ICharactersService CharactersService
 @attribute [StreamRendering]
 
+<ModuleNavigation CurrentPage="Personagens" Module="EPagesNavigationsKey.Home" />
+
 @if(Characters == null)
 {
     <StarWarsLoader Text="Carregando..." />

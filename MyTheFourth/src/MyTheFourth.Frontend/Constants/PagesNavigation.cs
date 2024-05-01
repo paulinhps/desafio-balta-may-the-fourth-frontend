@@ -2,8 +2,6 @@ using BlazorBootstrap;
 
 public struct PagesNavigationModule(EPagesNavigationsKey moduleKey, string Name, IEnumerable<BreadcrumbItem> navigationItems)
 {
-
-
     public EPagesNavigationsKey ModuleKey { get; } = moduleKey;
     public string Name { get; } = Name;
     public IEnumerable<BreadcrumbItem> NavigationItems { get; } = navigationItems;
