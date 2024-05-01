@@ -10,9 +10,16 @@
 else 
 {
     <Catalog>
-        @foreach (var character in Characters) 
-        {
-            <CatalogDetail ImgUrl="@character.ImgUrl" Name="@character.Name" Link="@($"characters/{character.Slug ?? character.Id.ToString()}")"/>
+        @{
+            if (Characters == null || !Characters.Any())
+                @Constants.ErrorMessages.NoContent
+            else
+            {
+                @foreach (var character in Characters) 
+                {
+                    <CatalogDetail ImgUrl="@character.ImgUrl" Name="@character.Name" Link="@($"characters/{character.Slug ?? character.Id.ToString()}")"/>
+                }
+            }
         }
     </Catalog>
 }

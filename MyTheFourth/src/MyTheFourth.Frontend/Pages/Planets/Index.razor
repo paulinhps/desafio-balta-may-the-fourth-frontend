@@ -10,9 +10,16 @@
 else 
 {
     <Catalog>
-        @foreach (var planets in Planets)
-        {
-            <CatalogDetail ImgUrl="@planets.ImgUrl" Name="@planets.Name" Link="@($"planets/{planets.Slug ?? planets.Id.ToString()}")" />
+        @{            
+            if (Planets == null || !Planets.Any())
+                @Constants.ErrorMessages.NoContent
+            else
+            {
+                @foreach (var planets in Planets)
+                {
+                    <CatalogDetail ImgUrl="@planets.ImgUrl" Name="@planets.Name" Link="@($"planets/{planets.Slug ?? planets.Id.ToString()}")" />
+                }
+            }
         }
     </Catalog>
 }
