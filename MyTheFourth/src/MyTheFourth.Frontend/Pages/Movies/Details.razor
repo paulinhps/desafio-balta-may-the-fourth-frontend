@@ -11,7 +11,7 @@
 }
 else
 {
-    <Navigator Home="🏚" Url="/movies" UrlName="Filmes" PageName="@Movie.Title" />
+    <ModuleNavigation CurrentPage="@Movie.Title" Module="EPagesNavigationsKey.Movies" />
     <MainDetails Name="@Movie.Title">
         <ChildContent>
             <DetailItems LabelName="Episódio" LabelValue="@Movie.Episode.ToString()" />
