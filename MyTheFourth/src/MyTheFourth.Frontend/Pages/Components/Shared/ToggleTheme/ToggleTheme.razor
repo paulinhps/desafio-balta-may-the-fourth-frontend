@@ -27,10 +27,13 @@
     {
         var theme = await localStorage.GetItemAsync<string>("theme") as String;
         if (string.IsNullOrEmpty(theme))
+        {
+            await SetDefaultThemeAsync();
             return;
+        }
 
         await ReloadThemeAsync(theme);
-        isDark = theme == "dark";
+        UpdateToggle(theme);
     }
 
     private async Task<String> BsThemeAsync() => await Js.InvokeAsync<string>("getBsTheme");
@@ -49,5 +52,8 @@
     {
         await SetThemeAsync(theme);
         await SaveThemeAsync(theme);
+        UpdateToggle(await BsThemeAsync());
     }
+    private async Task SetDefaultThemeAsync() => await ReloadThemeAsync("dark");
+    private void UpdateToggle(string theme) => isDark = theme == "dark";
 }
