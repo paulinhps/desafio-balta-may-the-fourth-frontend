@@ -1,9 +1,4 @@
 .loader-container {
-    /*display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 500px;*/
-    /*margin: 0;*/
     position: relative;
 }
 
@@ -12,9 +7,6 @@
     top: 50%;
     width: 100%;
     text-align: center;
-    /*height: 100%;
-    display: inline-block;*/
-    /*position: relative;*/
     filter: drop-shadow(0 0 1px #FFF);
 }
 

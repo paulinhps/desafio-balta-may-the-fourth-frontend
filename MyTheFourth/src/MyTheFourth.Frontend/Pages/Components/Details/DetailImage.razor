@@ -1,0 +1,15 @@
+﻿<div class="col-lg-4 col-md-5 xs-margin-30px-bottom">
+    <div class="team-single-img">
+        <img style="max-width: 315px; width: 100%;" src="@LabelImgUrl" alt="@LabelName">
+    </div>
+</div> 
+
+@code {
+
+    [Parameter]
+    [EditorRequired]
+    public string LabelName { get; set; }
+    [Parameter]
+    [EditorRequired]
+    public string LabelImgUrl { get; set; }
+}

@@ -1,0 +1,21 @@
+﻿<li>
+    <div class="row">
+        <div class="col-md-5 col-5">
+            <i class="far fa-gem text-yellow"></i>
+            <strong class="margin-10px-left text-yellow">@LabelName:</strong>
+        </div>
+        <div class="col-md-7 col-7">
+            @ChildContent
+        </div>
+    </div>
+</li>
+
+@code {
+
+    [Parameter]
+    [EditorRequired]
+    public string LabelName { get; set; }
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+}

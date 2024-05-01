@@ -1,0 +1,21 @@
+﻿<section>
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">@Home</a></li>
+            <li class="breadcrumb-item"><a href="@Url">@UrlName</a></li>
+            <li class="breadcrumb-item active" aria-current="page">@PageName</li>
+        </ol>
+    </nav>
+</section>
+
+@code {
+    [Parameter]
+    public string Home { get; set; }
+    [Parameter]
+    public string Url { get; set; }
+    [Parameter]
+    public string UrlName { get; set; }
+    [Parameter]
+    public string PageName { get; set; }
+
+}

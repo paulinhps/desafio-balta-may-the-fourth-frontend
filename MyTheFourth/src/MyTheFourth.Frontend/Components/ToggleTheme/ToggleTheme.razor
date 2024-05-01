@@ -1,0 +1,53 @@
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+@inject IJSRuntime Js
+
+<label for="theme" class="theme">
+	<span>Light</span>
+	<span class="theme__toggle-wrap">
+        <input id="theme" class="theme__toggle" type="checkbox" role="switch" name="theme" @onclick="ToggleThemeAsync" @bind="isDark"/>
+		<span class="theme__icon">
+			<span class="theme__icon-part"></span>
+			<span class="theme__icon-part"></span>
+			<span class="theme__icon-part"></span>
+			<span class="theme__icon-part"></span>
+			<span class="theme__icon-part"></span>
+			<span class="theme__icon-part"></span>
+			<span class="theme__icon-part"></span>
+			<span class="theme__icon-part"></span>
+			<span class="theme__icon-part"></span>
+		</span>
+	</span>
+	<span>Dark</span>
+</label>
+
+
+@code {
+    private bool isDark { get; set; }
+    protected override async Task OnInitializedAsync()
+    {
+        var theme = await localStorage.GetItemAsync<string>("theme") as String;
+        if (string.IsNullOrEmpty(theme))
+            return;
+
+        await ReloadThemeAsync(theme);
+        isDark = theme == "dark";
+    }
+
+    private async Task<String> BsThemeAsync() => await Js.InvokeAsync<string>("getBsTheme");
+
+
+    private async Task ToggleThemeAsync() 
+    {
+        await Js.InvokeVoidAsync("toggleTheme");
+        string theme = await BsThemeAsync();
+        await SaveThemeAsync(theme);
+    }
+
+    private async Task SetThemeAsync(string theme) => await Js.InvokeVoidAsync("setTheme", args: theme);
+    private async Task SaveThemeAsync(string theme) => await localStorage.SetItemAsStringAsync("theme", theme);
+    private async Task ReloadThemeAsync(string theme)
+    {
+        await SetThemeAsync(theme);
+        await SaveThemeAsync(theme);
+    }
+}

@@ -1,8 +1,9 @@
-﻿@using MyTheFourth.Frontend.Configuration
+@using MyTheFourth.Frontend.Configuration
 @using MyTheFourth.Frontend.Constants
 
-@inject Blazored.LocalStorage.ILocalStorageService localStorage
 @inject IBackendServiceProvider backendProviderService
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+@inject IJSRuntime Js
 
 <Router AppAssembly="@typeof(App).Assembly">
     <Found Context="routeData">
@@ -19,8 +20,6 @@
 
 @code {
     protected override async Task OnInitializedAsync() {
-
-
        var backendId = await localStorage.GetItemAsync<string>(LocalStoragePropertyNaming.BackendServiceDataName);
         
         if(!string.IsNullOrEmpty(backendId)) {
