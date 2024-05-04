@@ -1,4 +1,3 @@
-using AutoMapper;
 using MyTheFourth.Frontend.Constants;
 using MyTheFourth.Frontend.Extensions;
 using MyTheFourth.Frontend.Models;
@@ -12,15 +11,15 @@ public class RebelRenegadesMyTheFourthHttpService :
 IMyTheFourthService
 {
     private readonly HttpClient _client;
-    private readonly IMapper _mapper;
 
-    public RebelRenegadesMyTheFourthHttpService(HttpClient client, IMapper mapper)
+    public RebelRenegadesMyTheFourthHttpService(HttpClient client)
     {
         _client = client;
-        _mapper = mapper;
     }
 
     public string ServiceId => BackendServicesIdentifiers.RebelRenegades;
+
+    private void ThrowNotImplementedException() => throw new NotImplementedException("Mapper not implemented!");
 
     public async Task<Character?> GetCharacterAsync(string characterId)
     {
@@ -31,8 +30,9 @@ IMyTheFourthService
         var response = await _client.GetAsync($"{MyTheFourthHttpServiceEndpoints.MoviesEndpoint}/{guidId}");
 
         var result = await response.GetContentData<ApiDataResponse<PersonDetailsData>>();
-
-        return result?.Data?.DataItem is not null ? _mapper.Map<Character>(result.Data!.DataItem) : default!;
+        ThrowNotImplementedException();
+        return default!;
+        // return result?.Data?.DataItem is not null ? _mapper.Map<Character>(result.Data!.DataItem) : default!;
     }
 
     private async Task<Character?> GetCharacterBySlugAsync(string slug)
@@ -41,7 +41,9 @@ IMyTheFourthService
 
         var result = await response.GetContentData<ApiDataResponse<PersonDetailsData>>();
 
-        return result?.Data?.DataItem is not null ? _mapper.Map<Character>(result.Data!.DataItem) : default!;
+        ThrowNotImplementedException();
+        return default!;
+        // return result?.Data?.DataItem is not null ? _mapper.Map<Character>(result.Data!.DataItem) : default!;
     }
 
     public async Task<Movie?> GetMovieAsync(string movieId)
@@ -54,7 +56,9 @@ IMyTheFourthService
 
         var result = await response.GetContentData<ApiDataResponse<FilmDetailsData>>();
 
-        return result?.Data?.DataItem is not null ? _mapper.Map<Movie>(result.Data!.DataItem) : default!;
+        ThrowNotImplementedException();
+        return default!;
+        // return result?.Data?.DataItem is not null ? _mapper.Map<Movie>(result.Data!.DataItem) : default!;
     }
 
     private async Task<Movie?> GetMovieBySlugAsync(string slug)
@@ -64,7 +68,9 @@ IMyTheFourthService
 
         var result = await response.GetContentData<ApiDataResponse<FilmDetailsData>>();
 
-        return result?.Data?.DataItem is not null ? _mapper.Map<Movie>(result.Data!.DataItem) : default!;
+        ThrowNotImplementedException();
+        return default!;
+        // return result?.Data?.DataItem is not null ? _mapper.Map<Movie>(result.Data!.DataItem) : default!;
     }
 
     public async Task<Planet?> GetPlanetAsync(string planetId)
@@ -76,7 +82,9 @@ IMyTheFourthService
 
         var result = await response.GetContentData<ApiDataResponse<PlanetDetailsData>>();
 
-        return result?.Data?.DataItem is not null ? _mapper.Map<Planet>(result.Data!.DataItem) : default!;
+        ThrowNotImplementedException();
+        return default!;
+        // return result?.Data?.DataItem is not null ? _mapper.Map<Planet>(result.Data!.DataItem) : default!;
     }
 
     private async Task<Planet?> GetPlanetBySlugAsync(string slug)
@@ -87,7 +95,9 @@ IMyTheFourthService
 
             var result = await response.GetContentData<ApiDataResponse<PlanetDetailsData>>();
 
-            return result?.Data?.DataItem is not null ? _mapper.Map<Planet>(result.Data!.DataItem) : default!;
+            ThrowNotImplementedException();
+            return default!;
+            // return result?.Data?.DataItem is not null ? _mapper.Map<Planet>(result.Data!.DataItem) : default!;
 
         }
         catch (System.Exception ex)
@@ -106,7 +116,9 @@ IMyTheFourthService
 
         var result = await response.GetContentData<ApiDataResponse<StarshipDetailsData>>();
 
-        return result?.Data?.DataItem is not null ? _mapper.Map<Starship>(result.Data!.DataItem) : default!;
+        ThrowNotImplementedException();
+        return default!;
+        // return result?.Data?.DataItem is not null ? _mapper.Map<Starship>(result.Data!.DataItem) : default!;
     }
 
     private async Task<Starship?> GetStarshipBySlugAsync(string slug)
@@ -117,7 +129,9 @@ IMyTheFourthService
 
             var result = await response.GetContentData<ApiDataResponse<StarshipDetailsData>>();
 
-            return result?.Data?.DataItem is not null ? _mapper.Map<Starship>(result.Data!.DataItem) : default!;
+            ThrowNotImplementedException();
+            return default!;
+            // return result?.Data?.DataItem is not null ? _mapper.Map<Starship>(result.Data!.DataItem) : default!;
 
         }
         catch (System.Exception ex)
@@ -135,7 +149,9 @@ IMyTheFourthService
 
         var result = await response.GetContentData<ApiDataResponse<VehicleDetailsData>>();
 
-        return result?.Data?.DataItem is not null ? _mapper.Map<Vehicle>(result.Data!.DataItem) : default!;
+        ThrowNotImplementedException();
+        return default!;
+        // return result?.Data?.DataItem is not null ? _mapper.Map<Vehicle>(result.Data!.DataItem) : default!;
     }
 
     private async Task<Vehicle?> GetVehicleBySlugAsync(string slug)
@@ -144,7 +160,9 @@ IMyTheFourthService
 
         var result = await response.GetContentData<ApiDataResponse<VehicleDetailsData>>();
 
-        return result?.Data?.DataItem is not null ? _mapper.Map<Vehicle>(result.Data!.DataItem) : default!;
+        ThrowNotImplementedException();
+        return default!;
+        // return result?.Data?.DataItem is not null ? _mapper.Map<Vehicle>(result.Data!.DataItem) : default!;
     }
 
     public async Task<IEnumerable<Character>> ListCharactersAsync(int? page = null, int? pageSize = null)
@@ -156,7 +174,9 @@ IMyTheFourthService
 
             var result = await response.GetContentData<ApiDataResponse<PeopleListData>>();
 
-            return result?.IsSuccess is true ? _mapper.Map<IEnumerable<Character>>(result.Data!.DataItem!.Items) : Enumerable.Empty<Character>();
+            ThrowNotImplementedException();
+            return default!;
+            // return result?.IsSuccess is true ? _mapper.Map<IEnumerable<Character>>(result.Data!.DataItem!.Items) : Enumerable.Empty<Character>();
         }
         catch (Exception ex)
         {
@@ -175,7 +195,9 @@ IMyTheFourthService
 
             var result = await response.GetContentData<ApiDataResponse<FilmsListData>>();
 
-            return result?.IsSuccess is true ? _mapper.Map<IEnumerable<Movie>>(result.Data!.DataItem!.Items) : Enumerable.Empty<Movie>();
+            ThrowNotImplementedException();
+            return default!;
+            // return result?.IsSuccess is true ? _mapper.Map<IEnumerable<Movie>>(result.Data!.DataItem!.Items) : Enumerable.Empty<Movie>();
         }
         catch (Exception ex)
         {
@@ -194,7 +216,9 @@ IMyTheFourthService
 
             var result = await response.GetContentData<ApiDataResponse<PlanetsListData>>();
 
-            return result?.IsSuccess is true ? _mapper.Map<IEnumerable<Planet>>(result.Data!.DataItem!.Items) : Enumerable.Empty<Planet>();
+            ThrowNotImplementedException();
+            return default!;
+            // return result?.IsSuccess is true ? _mapper.Map<IEnumerable<Planet>>(result.Data!.DataItem!.Items) : Enumerable.Empty<Planet>();
         }
         catch (Exception ex)
         {
@@ -213,7 +237,9 @@ IMyTheFourthService
 
             var result = await response.GetContentData<ApiDataResponse<StarshipsListData>>();
 
-            return result?.IsSuccess is true ? _mapper.Map<IEnumerable<Starship>>(result.Data!.DataItem!.Items) : Enumerable.Empty<Starship>();
+            ThrowNotImplementedException();
+            return default!;
+            // return result?.IsSuccess is true ? _mapper.Map<IEnumerable<Starship>>(result.Data!.DataItem!.Items) : Enumerable.Empty<Starship>();
         }
         catch (Exception ex)
         {
@@ -232,7 +258,9 @@ IMyTheFourthService
 
             var result = await response.GetContentData<ApiDataResponse<VehiclesListData>>();
 
-            return result?.IsSuccess is true ? _mapper.Map<IEnumerable<Vehicle>>(result.Data!.DataItem!.Items) : Enumerable.Empty<Vehicle>();
+            ThrowNotImplementedException();
+            return default!;
+            // return result?.IsSuccess is true ? _mapper.Map<IEnumerable<Vehicle>>(result.Data!.DataItem!.Items) : Enumerable.Empty<Vehicle>();
         }
         catch (Exception ex)
         {

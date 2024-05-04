@@ -14,7 +14,6 @@ namespace MyTheFourth.Frontend.Extensions;
 
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using MyTheFourth.Frontend.DevsResistenceContext.AutoMapper;
 
 public static class WebAssemblyHostBuilderExtensions
 {
@@ -58,11 +57,10 @@ public static class WebAssemblyHostBuilderExtensions
         return builder;
     }
 
-    private static WebAssemblyHostBuilder AddBlazorBootstrapAndAutoMapper(this WebAssemblyHostBuilder builder)
+    private static WebAssemblyHostBuilder AddBlazorComponents(this WebAssemblyHostBuilder builder)
     {
         builder.Services.AddBlazoredLocalStorage();
         builder.Services.AddBlazorBootstrap();
-        builder.Services.AddAutoMapper(typeof(DevsResistenceMapperProfile), typeof(RebelRenegadesMapperProfile));
         return builder;
     }
 
@@ -86,7 +84,7 @@ public static class WebAssemblyHostBuilderExtensions
               .AddServices()
               .AddBackendProvidersAndApis()
               .ConfigureBlazoredLocalStorage()
-              .AddBlazorBootstrapAndAutoMapper()
+              .AddBlazorComponents()
               .AddBreadcrumbServices()
               .AddHttpClient();
         return builder;

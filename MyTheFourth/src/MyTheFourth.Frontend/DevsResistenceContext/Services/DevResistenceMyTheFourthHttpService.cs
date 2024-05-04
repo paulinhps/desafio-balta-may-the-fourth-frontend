@@ -1,4 +1,3 @@
-using AutoMapper;
 using MyTheFourth.Frontend.Constants;
 using MyTheFourth.Frontend.DevsResistenceContext.Constants;
 using MyTheFourth.Frontend.DevsResistenceContext.Models;
@@ -12,12 +11,10 @@ public class DevResistenceMyTheFourthHttpService :
 IMyTheFourthService
 {
     private readonly HttpClient _client;
-    private readonly IMapper _mapper;
 
-    public DevResistenceMyTheFourthHttpService(HttpClient client, IMapper mapper)
+    public DevResistenceMyTheFourthHttpService(HttpClient client)
     {
         _client = client;
-        _mapper = mapper;
     }
 
     public string ServiceId => BackendServicesIdentifiers.DevResistence;
