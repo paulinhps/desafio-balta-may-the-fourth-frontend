@@ -7,8 +7,6 @@
     <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
-  <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
   <ItemGroup>
     <PackageReference Include="Blazor.Bootstrap" Version="2.2.1" />
     <PackageReference Include="Blazored.LocalStorage" Version="4.5.0" />
