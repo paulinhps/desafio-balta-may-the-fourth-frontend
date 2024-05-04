@@ -1,3 +1,5 @@
+using MyTheFourth.Frontend.DevsResistenceContext.Models;
+
 namespace MyTheFourth.Frontend.Models;
 
 
