@@ -6,7 +6,14 @@
 
 @if (Planet == null)
 {
-    <StarWarsLoader Text="Carregando..." />
+    if (IsEmpyt)
+    {
+        @Constants.ErrorMessages.NoContent
+    }
+    else
+    {
+        <StarWarsLoader Text="Carregando..." />
+    }
 }
 else
 {
@@ -22,7 +29,7 @@ else
             <DetailItems LabelName="Superfície de água" LabelValue="@Planet.SurfaceWater" />
             <DetailItems LabelName="População" LabelValue="@Planet.Population" />
 
-             <DetailItemsTitle LabelName="Personagens">
+            <DetailItemsTitle LabelName="Personagens">
                 @{
                     foreach (var character in Planet.Characters)
                     {
@@ -55,4 +62,10 @@ else
 
         Planet = await PlanetsService.GetPlanetAsync(planetId);
     }
+    protected override Task OnAfterRenderAsync(bool firstRender)
+    {
+        IsEmpyt = Planet is null;
+        return base.OnAfterRenderAsync(firstRender);
+    }
+    private bool IsEmpyt = false;
 }

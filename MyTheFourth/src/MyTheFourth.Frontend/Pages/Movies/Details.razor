@@ -7,7 +7,14 @@
 
 @if (Movie == null)
 {
-    <StarWarsLoader Text="Carregando..." />
+    if (IsEmpyt)
+    {
+        @Constants.ErrorMessages.NoContent
+    }
+    else
+    {
+        <StarWarsLoader Text="Carregando..." />
+    }
 }
 else
 {
@@ -18,7 +25,7 @@ else
             <DetailItems LabelName="Diretor" LabelValue="@Movie.Director" />
             <DetailItems LabelName="Produtor" LabelValue="@Movie.Producer" />
             <DetailItems LabelName="Data Lançamento" LabelValue="@Movie.ReleaseDate.ToString("d")" />
-            
+
             <DetailItemsTitle LabelName="Personagens">
                 @{
                     foreach (var character in Movie.Characters)
@@ -36,7 +43,7 @@ else
                     }
                 }
             </DetailItemsTitle>
-            
+
             <DetailItemsTitle LabelName="Naves">
                 @{
                     foreach (var starship in Movie.Starships)
@@ -45,7 +52,7 @@ else
                     }
                 }
             </DetailItemsTitle>
-            
+
             <DetailItemsTitle LabelName="Veículos">
                 @{
                     foreach (var vehicle in Movie.Vehicles)
@@ -54,12 +61,7 @@ else
                     }
                 }
             </DetailItemsTitle>
-
-
         </ChildContent>
-       @*  <ChildImage>
-            <DetailImage LabelName="@Movie.Title" LabelImgUrl="@Movie.ImgUrl" />
-        </ChildImage> *@
     </MainDetails>
 }
 
@@ -67,5 +69,13 @@ else
     [Parameter]
     public string movieId { get; set; } = null!;
     private Movie? Movie { get; set; }
+
     protected override async Task OnInitializedAsync() => Movie = await MoviesService.GetMovieAsync(movieId);
+
+    protected override Task OnAfterRenderAsync(bool firstRender)
+    {
+        IsEmpyt = Movie is null;
+        return base.OnAfterRenderAsync(firstRender);
+    }
+    private bool IsEmpyt = false;
 }    

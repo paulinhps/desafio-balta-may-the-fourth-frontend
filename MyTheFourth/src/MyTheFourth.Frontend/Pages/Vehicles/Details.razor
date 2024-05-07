@@ -3,10 +3,19 @@
 @inject IVehiclesService VehiclesService
 @attribute [StreamRendering]
 
-@if(Vehicle == null) {
-    <StarWarsLoader Text="Carregando..." />
+@if (Vehicle == null)
+{
+    if (IsEmpyt)
+    {
+        @Constants.ErrorMessages.NoContent
+    }
+    else
+    {
+        <StarWarsLoader Text="Carregando..." />
+    }
 }
-else {
+else
+{
 
     <ModuleNavigation CurrentPage="@Vehicle.Name" Module="EPagesNavigationsKey.Vehicles" />
     <MainDetails Name="@Vehicle.Name">
@@ -30,7 +39,7 @@ else {
                 {
                     foreach (var movie in @Vehicle.Movies)
                     {
-                        <DetailItemsLink LabelValue="@movie.Title" LabelUrl="@($"/movies/{movie.Slug ?? movie.Id}")"/>
+                        <DetailItemsLink LabelValue="@movie.Title" LabelUrl="@($"/movies/{movie.Slug ?? movie.Id}")" />
                     }
                 }
 
@@ -46,4 +55,11 @@ else {
     private Vehicle? Vehicle { get; set; }
 
     protected override async Task OnInitializedAsync() => Vehicle = await VehiclesService.GetVehicleAsync(vehicleId);
-}    
+
+    protected override Task OnAfterRenderAsync(bool firstRender)
+    {
+        IsEmpyt = Vehicle is null;
+        return base.OnAfterRenderAsync(firstRender);
+    }
+    private bool IsEmpyt = false;
+}
