@@ -5,7 +5,14 @@
 
 @if (Character == null)
 {
-    <StarWarsLoader Text="Carregando..." />
+    if (IsEmpyt)
+    {
+        @Constants.ErrorMessages.NoContent
+    }
+    else
+    {
+        <StarWarsLoader Text="Carregando..." />
+    }
 }
 
 else
@@ -14,8 +21,9 @@ else
     <MainDetails Name="@Character.Name">
         <ChildContent>
             <DetailItems LabelName="Data de Aniversário" LabelValue="@Character.BirthYear" />
-            @if(@Character.Planet is not null) {
-            <DetailItems LabelName="Planeta" LabelValue="@Character.Planet.Name" />
+            @if (@Character.Planet is not null)
+            {
+                <DetailItems LabelName="Planeta" LabelValue="@Character.Planet.Name" />
             }
             <DetailItems LabelName="Gênero" LabelValue="@Character.Gender" />
             <DetailItems LabelName="Altura" LabelValue="@Character.Height" />
@@ -32,7 +40,7 @@ else
                     }
                 }
             </DetailItemsTitle>
-          
+
         </ChildContent>
     </MainDetails>
 }
@@ -50,4 +58,10 @@ else
         Character = await CharactersService.GetCharacterAsync(characterId);
         StateHasChanged();
     }
+    protected override Task OnAfterRenderAsync(bool firstRender)
+    {
+        IsEmpyt = Character is null;
+        return base.OnAfterRenderAsync(firstRender);
+    }
+    private bool IsEmpyt = false;
 }

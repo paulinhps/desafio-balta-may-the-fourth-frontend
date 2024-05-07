@@ -3,10 +3,19 @@
 @inject IStarshipsService StarShipsService
 @attribute [StreamRendering]
 
-@if(Starship == null) {
-    <StarWarsLoader Text="Carregando..." />
+@if (Starship == null)
+{
+    if (IsEmpyt)
+    {
+        @Constants.ErrorMessages.NoContent
+    }
+    else
+    {
+        <StarWarsLoader Text="Carregando..." />
+    }
 }
-else {
+else
+{
     <ModuleNavigation CurrentPage="@Starship.Name" Module="EPagesNavigationsKey.Starships" />
     <MainDetails Name="@Starship.Name">
         <ChildContent>
@@ -38,12 +47,19 @@ else {
 
 @code {
     [Parameter]
-    public string starshipId {get; set;} = null!;
+    public string starshipId { get; set; } = null!;
 
     private Starship? Starship = null;
 
-    protected override async Task OnInitializedAsync() {
+    protected override async Task OnInitializedAsync()
+    {
 
-       Starship = await StarShipsService.GetStarshipAsync(starshipId);
+        Starship = await StarShipsService.GetStarshipAsync(starshipId);
     }
+    protected override Task OnAfterRenderAsync(bool firstRender)
+    {
+        IsEmpyt = Starship is null;
+        return base.OnAfterRenderAsync(firstRender);
+    }
+    private bool IsEmpyt = false;
 }    
